@@ -7,18 +7,16 @@ import { reset } from "styled-reset";
 const GlobalStyle = createGlobalStyle`
     ${reset}
     body {
+        width:100%;
+        height:200vh;
         margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',sans-serif;
+        font-family:'Noto Sans KR', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         font-size : 16px;
+        
     }
-
-    code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
-    }
+ 
 
 `;
 
