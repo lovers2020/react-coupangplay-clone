@@ -8,8 +8,9 @@ import {
 	HeaderTitle,
 	ProfileDetail,
 	ProfileIcon,
+	searchVariants,
+	titleVariants,
 } from "../style/HeaderStyles";
-import { AnimatePresence } from "framer-motion";
 const headerTitle: string[] = [
 	"TV",
 	"영화",
@@ -43,54 +44,70 @@ export default function Header() {
 	return (
 		<>
 			<HeaderContainer>
+				<HeaderTitle
+					style={{
+						padding: "0.5rem",
+					}}
+				>
+					<button
+						onClick={onLogoClick}
+						style={{
+							backgroundColor: "transparent",
+							border: "none",
+						}}
+					>
+						<HeaderLogo />
+					</button>
+				</HeaderTitle>
 				<HeaderRow>
-					<HeaderTitle>
-						<button
-							onClick={onLogoClick}
-							style={{
-								backgroundColor: "transparent",
-								border: "none",
-							}}
-						>
-							<HeaderLogo />
-						</button>
-					</HeaderTitle>
 					{[0, 1, 2, 3, 4, 5, 6].map((current) => (
-						<HeaderTitle>
-							<Link to={`${headerTitleEng[current]}`}>
+						<HeaderTitle
+							variants={titleVariants}
+							initial="initial"
+							whileHover="hover"
+						>
+							<Link
+								to={`${headerTitleEng[current]}`}
+								style={{ display: "block", padding: "1rem" }}
+							>
 								{headerTitle[current]}
 							</Link>
 						</HeaderTitle>
 					))}
 				</HeaderRow>
-				<AnimatePresence>
-					<HeaderRow>
-						<HeaderTitle>
-							<AiOutlineSearch style={{ fontSize: "30px" }} />
-						</HeaderTitle>
-						<HeaderTitle>
-							<ProfileIcon>
-								<p>S</p>
-								<ProfileDetail id="profileDetail">
-									{[0, 1, 2, 3, 4, 5].map((current) => (
-										<span
-											style={{
-												margin: "12px 0",
-												padding: "0 0 0 25px",
-											}}
-										>
-											{profileDetail[current]}
-										</span>
-									))}
-								</ProfileDetail>
-							</ProfileIcon>
-							<BiChevronDown
-								id="profileArrow"
-								style={{ fontSize: "30px" }}
-							/>
-						</HeaderTitle>
-					</HeaderRow>
-				</AnimatePresence>
+				<HeaderRow style={{ marginLeft: "auto" }}>
+					<HeaderTitle
+						variants={searchVariants}
+						initial="initial"
+						whileHover="hover"
+					>
+						<AiOutlineSearch
+							id="searchicon"
+							style={{ fontSize: "30px" }}
+						/>
+					</HeaderTitle>
+					<HeaderTitle style={{ padding: "0 10px" }}>
+						<ProfileIcon>
+							<p>S</p>
+							<ProfileDetail id="profileDetail">
+								{[0, 1, 2, 3, 4, 5].map((current) => (
+									<span
+										style={{
+											margin: "12px 0",
+											padding: "0 0 0 25px",
+										}}
+									>
+										{profileDetail[current]}
+									</span>
+								))}
+							</ProfileDetail>
+						</ProfileIcon>
+						<BiChevronDown
+							id="profileArrow"
+							style={{ fontSize: "30px" }}
+						/>
+					</HeaderTitle>
+				</HeaderRow>
 			</HeaderContainer>
 		</>
 	);

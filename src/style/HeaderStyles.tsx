@@ -1,31 +1,34 @@
+import { motion } from "framer-motion";
 import { styled } from "styled-components";
 
 export const HeaderContainer = styled.div`
 	position: fixed;
 	top: 0;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 	width: 100%;
 	height: 70px;
 	padding: 8px 30px;
 	background-color: black;
 	z-index: 99;
+	white-space: nowrap;
 `;
 export const HeaderRow = styled.ul`
-	height: 100%;
-	display: flex;
-	align-items: center;
-`;
-export const HeaderTitle = styled.li`
 	height: 100%;
 	display: flex;
 	align-items: center;
 	font-size: 18px;
 	font-weight: 500;
 	color: white;
+`;
+export const HeaderTitle = styled(motion.li)`
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background-color: transparent;
-	margin: 0 1.15rem;
+	margin-right: 8px;
 	cursor: pointer;
 	a {
 		text-decoration: none;
@@ -50,15 +53,17 @@ export const HeaderLogo = styled.div`
 `;
 export const ProfileIcon = styled.div`
 	position: relative;
-	width: 30px;
-	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 36px;
+	height: 36px;
 	color: white;
 	background: linear-gradient(to bottom, #006eb3, #c9c7c7);
 	border: 2px solid white;
 	border-radius: 50%;
 	padding: 6px;
-	text-align: center;
-	font-size: 14px;
+
 	cursor: pointer;
 `;
 export const ProfileDetail = styled.div`
@@ -68,7 +73,7 @@ export const ProfileDetail = styled.div`
 	align-items: flex-start;
 	position: absolute;
 	right: -20px;
-	top: 35px;
+	top: 40px;
 	background-color: #333333;
 	color: rgba(255, 255, 255, 0.7);
 	font-size: 16px;
@@ -76,6 +81,7 @@ export const ProfileDetail = styled.div`
 	border-radius: 5px;
 	width: 130px;
 	height: 260px;
+
 	&:hover {
 		display: flex;
 	}
@@ -85,3 +91,28 @@ export const ProfileDetail = styled.div`
 		}
 	}
 `;
+
+export const titleVariants = {
+	initial: {
+		border: "none",
+	},
+	hover: {
+		borderBottom: "2px solid white",
+		transition: {
+			duration: 0,
+		},
+	},
+};
+
+export const searchVariants = {
+	initial: {
+		scale: 1,
+	},
+	hover: {
+		scale: 1.2,
+		transition: {
+			type: "tween",
+			duration: 0.3,
+		},
+	},
+};
