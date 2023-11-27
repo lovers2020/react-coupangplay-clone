@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { styled } from "styled-components";
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled(motion.div)`
 	position: fixed;
 	top: 0;
 	display: flex;
@@ -13,6 +13,7 @@ export const HeaderContainer = styled.div`
 	background-color: black;
 	z-index: 99;
 	white-space: nowrap;
+	transition: background-color 0.3s ease-in-out;
 `;
 export const HeaderRow = styled.ul`
 	height: 100%;
@@ -40,6 +41,14 @@ export const HeaderTitle = styled(motion.li)`
 		}
 		#profileArrow {
 			rotate: 180deg;
+		}
+		a {
+			border-bottom: 2px solid white;
+		}
+	}
+	&:focus-within {
+		a {
+			border-bottom: 2px solid white;
 		}
 	}
 `;
@@ -92,18 +101,6 @@ export const ProfileDetail = styled.div`
 	}
 `;
 
-export const titleVariants = {
-	initial: {
-		border: "none",
-	},
-	hover: {
-		borderBottom: "2px solid white",
-		transition: {
-			duration: 0,
-		},
-	},
-};
-
 export const searchVariants = {
 	initial: {
 		scale: 1,
@@ -114,5 +111,14 @@ export const searchVariants = {
 			type: "tween",
 			duration: 0.3,
 		},
+	},
+};
+
+export const scrollVariants = {
+	initial: {
+		backgroundColor: "transparent",
+	},
+	scroll: {
+		backgroundColor: "black",
 	},
 };

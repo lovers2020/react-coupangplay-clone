@@ -8,9 +8,10 @@ import {
 	HeaderTitle,
 	ProfileDetail,
 	ProfileIcon,
+	scrollVariants,
 	searchVariants,
-	titleVariants,
 } from "../style/HeaderStyles";
+import { useAnimation, useMotionValueEvent, useScroll } from "framer-motion";
 const headerTitle: string[] = [
 	"TV",
 	"영화",
@@ -27,7 +28,7 @@ const headerTitleEng: string[] = [
 	"store",
 	"kids",
 	"news",
-	"liked",
+	"likedcontents",
 ];
 const profileDetail: string[] = [
 	"프로필 관리",
@@ -38,12 +39,25 @@ const profileDetail: string[] = [
 	"로그아웃",
 ];
 export default function Header() {
+	const { scrollY } = useScroll();
+	const scrollAnimation = useAnimation();
+	useMotionValueEvent(scrollY, "change", (y) => {
+		if (y >= 100) {
+			scrollAnimation.start("scroll");
+		} else {
+			scrollAnimation.start("initial");
+		}
+	});
 	function onLogoClick() {
-		window.location.replace("/");
+		window.location.replace("/react-coupangplay-clone");
 	}
 	return (
 		<>
-			<HeaderContainer>
+			<HeaderContainer
+				variants={scrollVariants}
+				initial="initial"
+				animate={scrollAnimation}
+			>
 				<HeaderTitle
 					style={{
 						padding: "0.5rem",
@@ -61,11 +75,7 @@ export default function Header() {
 				</HeaderTitle>
 				<HeaderRow>
 					{[0, 1, 2, 3, 4, 5, 6].map((current) => (
-						<HeaderTitle
-							variants={titleVariants}
-							initial="initial"
-							whileHover="hover"
-						>
+						<HeaderTitle>
 							<Link
 								to={`${headerTitleEng[current]}`}
 								style={{ display: "block", padding: "1rem" }}
