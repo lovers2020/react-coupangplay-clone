@@ -1,11 +1,12 @@
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
 	HeaderContainer,
 	HeaderLogo,
 	HeaderRow,
-	HeaderTitle,
+	HeaderTitleLeft,
+	HeaderTitleRight,
 	ProfileDetail,
 	ProfileIcon,
 	scrollVariants,
@@ -49,7 +50,7 @@ export default function Header() {
 		}
 	});
 	function onLogoClick() {
-		window.location.replace("/react-coupangplay-clone");
+		window.location.replace("/react-coupangplay-clone/");
 	}
 	return (
 		<>
@@ -58,7 +59,7 @@ export default function Header() {
 				initial="initial"
 				animate={scrollAnimation}
 			>
-				<HeaderTitle
+				<HeaderTitleLeft
 					style={{
 						padding: "0.5rem",
 					}}
@@ -72,36 +73,40 @@ export default function Header() {
 					>
 						<HeaderLogo />
 					</button>
-				</HeaderTitle>
+				</HeaderTitleLeft>
 				<HeaderRow>
-					{[0, 1, 2, 3, 4, 5, 6].map((current) => (
-						<HeaderTitle>
+					{[0, 1, 2, 3, 4, 5, 6].map((current, index) => (
+						<HeaderTitleLeft key={index}>
 							<Link
 								to={`${headerTitleEng[current]}`}
 								style={{ display: "block", padding: "1rem" }}
 							>
 								{headerTitle[current]}
 							</Link>
-						</HeaderTitle>
+						</HeaderTitleLeft>
 					))}
 				</HeaderRow>
 				<HeaderRow style={{ marginLeft: "auto" }}>
-					<HeaderTitle
+					<HeaderTitleRight
 						variants={searchVariants}
 						initial="initial"
 						whileHover="hover"
+						transition={{ type: "tween", duration: 0.5 }}
 					>
-						<AiOutlineSearch
-							id="searchicon"
-							style={{ fontSize: "30px" }}
-						/>
-					</HeaderTitle>
-					<HeaderTitle style={{ padding: "0 10px" }}>
+						<Link to="/search">
+							<AiOutlineSearch
+								id="searchicon"
+								style={{ fontSize: "30px" }}
+							/>
+						</Link>
+					</HeaderTitleRight>
+					<HeaderTitleRight style={{ padding: "0 10px" }}>
 						<ProfileIcon>
 							<p>S</p>
 							<ProfileDetail id="profileDetail">
-								{[0, 1, 2, 3, 4, 5].map((current) => (
+								{[0, 1, 2, 3, 4, 5].map((current, index) => (
 									<span
+										key={index}
 										style={{
 											margin: "12px 0",
 											padding: "0 0 0 25px",
@@ -116,7 +121,7 @@ export default function Header() {
 							id="profileArrow"
 							style={{ fontSize: "30px" }}
 						/>
-					</HeaderTitle>
+					</HeaderTitleRight>
 				</HeaderRow>
 			</HeaderContainer>
 		</>

@@ -8,6 +8,8 @@ import { EtcPages } from "./componenets/EtcPages";
 import Movie from "./screen/Movie";
 import Tv from "./screen/Tv";
 import LikedContents from "./screen/LikedContents";
+import { Helmet } from "react-helmet";
+import Search from "./screen/Search";
 
 const router = createBrowserRouter(
 	[
@@ -21,7 +23,7 @@ const router = createBrowserRouter(
 					element: <Home />,
 				},
 				{
-					path: "/tv",
+					path: "tv",
 					element: <Tv />,
 				},
 				{
@@ -29,35 +31,42 @@ const router = createBrowserRouter(
 					element: <Movie />,
 				},
 				{
-					path: "/sports",
+					path: "sports",
 					element: <EtcPages />,
 				},
 				{
-					path: "/store",
+					path: "store",
 					element: <EtcPages />,
 				},
 				{
-					path: "/kids",
+					path: "kids",
 					element: <EtcPages />,
 				},
 				{
-					path: "/news",
+					path: "news",
 					element: <EtcPages />,
 				},
 				{
-					path: "/likedcontents",
+					path: "likedcontents",
 					element: <LikedContents />,
+				},
+				{
+					path: "search",
+					element: <Search />,
 				},
 			],
 		},
 	],
-	{ basename: "/react-coupangplay-clone" }
+	{ basename: "/react-coupangplay-clone/" }
 );
 
 function App() {
 	return (
 		<>
-			<RouterProvider router={router} />;
+			<Helmet>
+				<title>쿠팡플레이</title>
+			</Helmet>
+			<RouterProvider router={router} />
 		</>
 	);
 }

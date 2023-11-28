@@ -1,7 +1,9 @@
+import { MovieConatiner } from "../style/MovieStyles";
+
 export default function Movie() {
 	return (
 		<>
-			<div>asdasdsa</div>
+			<MovieConatiner>123 12 312 3 123 123</MovieConatiner>
 		</>
 	);
 }

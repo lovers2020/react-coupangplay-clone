@@ -23,7 +23,7 @@ export const HeaderRow = styled.ul`
 	font-weight: 500;
 	color: white;
 `;
-export const HeaderTitle = styled(motion.li)`
+export const HeaderTitleLeft = styled(motion.li)`
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -35,6 +35,21 @@ export const HeaderTitle = styled(motion.li)`
 		text-decoration: none;
 		color: white;
 	}
+	&:hover,
+	&:focus-within {
+		a {
+			border-bottom: 2px solid white;
+		}
+	}
+`;
+export const HeaderTitleRight = styled(motion.li)`
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	margin-right: 8px;
+	cursor: pointer;
 	&:hover {
 		#profileDetail {
 			display: flex;
@@ -42,14 +57,10 @@ export const HeaderTitle = styled(motion.li)`
 		#profileArrow {
 			rotate: 180deg;
 		}
-		a {
-			border-bottom: 2px solid white;
-		}
 	}
-	&:focus-within {
-		a {
-			border-bottom: 2px solid white;
-		}
+	a {
+		text-decoration: none;
+		color: white;
 	}
 `;
 export const HeaderLogo = styled.div`
@@ -107,10 +118,6 @@ export const searchVariants = {
 	},
 	hover: {
 		scale: 1.2,
-		transition: {
-			type: "tween",
-			duration: 0.3,
-		},
 	},
 };
 
