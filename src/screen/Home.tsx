@@ -1,15 +1,23 @@
+import { useQuery } from "react-query";
+import { getTvTopRated } from "../API";
+import { Loading } from "../style/HomeStyles";
+import { Banner } from "../componenets/Banner";
+
 export default function Home() {
+	const { data: tvTopRated, isLoading: tvTopRatedisLoading } = useQuery(
+		"tvTop",
+		getTvTopRated
+	);
+
 	return (
 		<>
-			<div
-				style={{
-					width: "100%",
-					height: "100vh",
-					backgroundColor: "blue",
-				}}
-			>
-				asdasd
-			</div>
+			{tvTopRatedisLoading ? (
+				<Loading>Loading...</Loading>
+			) : (
+				<>
+					<Banner data={tvTopRated}></Banner>
+				</>
+			)}
 		</>
 	);
 }

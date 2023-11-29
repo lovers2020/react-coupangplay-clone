@@ -8,7 +8,7 @@ import {
 
 export default function Footer() {
 	function onLogoClick() {
-		window.location.replace("/react-coupangplay-clone");
+		window.location.replace("/react-coupangplay-clone/");
 	}
 	return (
 		<>
@@ -36,7 +36,9 @@ export default function Footer() {
 						<FooterInfoDetail>
 							통신판매업신고: 2017-서울송파-0680
 						</FooterInfoDetail>
-						<FooterInfoDetail>사업자 정보</FooterInfoDetail>
+						<FooterInfoDetail id="footerblue">
+							사업자 정보
+						</FooterInfoDetail>
 					</FooterInfoColumn>
 				</FooterColumnLeft>
 				<FooterColumnLeft>
@@ -51,10 +53,16 @@ export default function Footer() {
 						<FooterInfoDetail>
 							호스팅 서비스 사업자: AWS 코리아
 						</FooterInfoDetail>
-						<FooterInfoDetail>서비스 이용약관</FooterInfoDetail>
-						<FooterInfoDetail>유료상품 이용약관</FooterInfoDetail>
-						<FooterInfoDetail>FAQ</FooterInfoDetail>
-						<FooterInfoDetail>개인정보 처리방침</FooterInfoDetail>
+						<FooterInfoDetail id="footerblue">
+							서비스 이용약관
+						</FooterInfoDetail>
+						<FooterInfoDetail id="footerblue">
+							유료상품 이용약관
+						</FooterInfoDetail>
+						<FooterInfoDetail id="footerblue">FAQ</FooterInfoDetail>
+						<FooterInfoDetail id="footerblue">
+							개인정보 처리방침
+						</FooterInfoDetail>
 					</FooterInfoColumn>
 				</FooterColumnLeft>
 				<FooterColumnRight>

@@ -7,11 +7,14 @@ const options = {
 	},
 };
 export function getTvTopRated() {
-	fetch(
+	return fetch(
 		"https://api.themoviedb.org/3/tv/top_rated?language=ko-KR&page=1",
 		options
-	)
-		.then((response) => response.json())
-		.then((response) => console.log(response))
-		.catch((err) => console.error(err));
+	).then((response) => response.json());
+}
+export function getTvDetail(id: number) {
+	return fetch(
+		`https://api.themoviedb.org/3/tv/${id}}?language=ko-KR`,
+		options
+	).then((response) => response.json());
 }

@@ -8,7 +8,7 @@ export const FooterContainer = styled.div`
 	background-color: black;
 	color: white;
 	padding: 4rem 0;
-	margin: auto;
+	margin: 0 auto;
 `;
 
 export const FooterColumnLeft = styled.div`
@@ -28,14 +28,12 @@ export const FooterColumnRight = styled.div`
 		height: 38px;
 	}
 `;
-export const FooterInfoColumn = styled.ul``;
-export const FooterInfoDetail = styled.li`
-	margin: 5px 0;
-	&:nth-child(5),
-	:nth-child(6),
-	:nth-child(7),
-	:nth-child(8) {
+export const FooterInfoColumn = styled.ul`
+	#footerblue {
 		color: #0097f6;
 		cursor: pointer;
 	}
+`;
+export const FooterInfoDetail = styled.li`
+	margin: 5px 0;
 `;
