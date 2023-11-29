@@ -1,15 +1,18 @@
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
 	HeaderContainer,
 	HeaderLogo,
 	HeaderRow,
-	HeaderTitle,
+	HeaderTitleLeft,
+	HeaderTitleRight,
 	ProfileDetail,
 	ProfileIcon,
+	scrollVariants,
+	searchVariants,
 } from "../style/HeaderStyles";
-import { AnimatePresence } from "framer-motion";
+import { useAnimation, useMotionValueEvent, useScroll } from "framer-motion";
 const headerTitle: string[] = [
 	"TV",
 	"영화",
@@ -26,7 +29,7 @@ const headerTitleEng: string[] = [
 	"store",
 	"kids",
 	"news",
-	"liked",
+	"likedcontents",
 ];
 const profileDetail: string[] = [
 	"프로필 관리",
@@ -37,60 +40,89 @@ const profileDetail: string[] = [
 	"로그아웃",
 ];
 export default function Header() {
+	const { scrollY } = useScroll();
+	const scrollAnimation = useAnimation();
+	useMotionValueEvent(scrollY, "change", (y) => {
+		if (y >= 100) {
+			scrollAnimation.start("scroll");
+		} else {
+			scrollAnimation.start("initial");
+		}
+	});
 	function onLogoClick() {
-		window.location.replace("/");
+		window.location.replace("/react-coupangplay-clone/");
 	}
 	return (
 		<>
-			<HeaderContainer>
+			<HeaderContainer
+				variants={scrollVariants}
+				initial="initial"
+				animate={scrollAnimation}
+			>
+				<HeaderTitleLeft
+					style={{
+						padding: "0.5rem",
+					}}
+				>
+					<button
+						onClick={onLogoClick}
+						style={{
+							backgroundColor: "transparent",
+							border: "none",
+						}}
+					>
+						<HeaderLogo />
+					</button>
+				</HeaderTitleLeft>
 				<HeaderRow>
-					<HeaderTitle>
-						<button
-							onClick={onLogoClick}
-							style={{
-								backgroundColor: "transparent",
-								border: "none",
-							}}
-						>
-							<HeaderLogo />
-						</button>
-					</HeaderTitle>
-					{[0, 1, 2, 3, 4, 5, 6].map((current) => (
-						<HeaderTitle>
-							<Link to={`${headerTitleEng[current]}`}>
+					{[0, 1, 2, 3, 4, 5, 6].map((current, index) => (
+						<HeaderTitleLeft key={index}>
+							<Link
+								to={`${headerTitleEng[current]}`}
+								style={{ display: "block", padding: "1rem" }}
+							>
 								{headerTitle[current]}
 							</Link>
-						</HeaderTitle>
+						</HeaderTitleLeft>
 					))}
 				</HeaderRow>
-				<AnimatePresence>
-					<HeaderRow>
-						<HeaderTitle>
-							<AiOutlineSearch style={{ fontSize: "30px" }} />
-						</HeaderTitle>
-						<HeaderTitle>
-							<ProfileIcon>
-								<p>S</p>
-								<ProfileDetail id="profileDetail">
-									{[0, 1, 2, 3, 4, 5].map((current) => (
-										<span
-											style={{
-												margin: "12px 0",
-												padding: "0 0 0 25px",
-											}}
-										>
-											{profileDetail[current]}
-										</span>
-									))}
-								</ProfileDetail>
-							</ProfileIcon>
-							<BiChevronDown
-								id="profileArrow"
+				<HeaderRow style={{ marginLeft: "auto" }}>
+					<HeaderTitleRight
+						variants={searchVariants}
+						initial="initial"
+						whileHover="hover"
+						transition={{ type: "tween", duration: 0.5 }}
+					>
+						<Link to="/search">
+							<AiOutlineSearch
+								id="searchicon"
 								style={{ fontSize: "30px" }}
 							/>
-						</HeaderTitle>
-					</HeaderRow>
-				</AnimatePresence>
+						</Link>
+					</HeaderTitleRight>
+					<HeaderTitleRight style={{ padding: "0 10px" }}>
+						<ProfileIcon>
+							<p>S</p>
+							<ProfileDetail id="profileDetail">
+								{[0, 1, 2, 3, 4, 5].map((current, index) => (
+									<span
+										key={index}
+										style={{
+											margin: "12px 0",
+											padding: "0 0 0 25px",
+										}}
+									>
+										{profileDetail[current]}
+									</span>
+								))}
+							</ProfileDetail>
+						</ProfileIcon>
+						<BiChevronDown
+							id="profileArrow"
+							style={{ fontSize: "30px" }}
+						/>
+					</HeaderTitleRight>
+				</HeaderRow>
 			</HeaderContainer>
 		</>
 	);
