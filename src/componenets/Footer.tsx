@@ -4,6 +4,7 @@ import {
 	FooterContainer,
 	FooterInfoColumn,
 	FooterInfoDetail,
+	FooterInfoDetailA,
 } from "./../style/FooterStyles";
 
 export default function Footer() {
@@ -36,9 +37,9 @@ export default function Footer() {
 						<FooterInfoDetail>
 							통신판매업신고: 2017-서울송파-0680
 						</FooterInfoDetail>
-						<FooterInfoDetail id="footerblue">
+						<FooterInfoDetailA id="footerblue">
 							사업자 정보
-						</FooterInfoDetail>
+						</FooterInfoDetailA>
 					</FooterInfoColumn>
 				</FooterColumnLeft>
 				<FooterColumnLeft>
@@ -53,16 +54,18 @@ export default function Footer() {
 						<FooterInfoDetail>
 							호스팅 서비스 사업자: AWS 코리아
 						</FooterInfoDetail>
-						<FooterInfoDetail id="footerblue">
+						<FooterInfoDetailA id="footerblue">
 							서비스 이용약관
-						</FooterInfoDetail>
-						<FooterInfoDetail id="footerblue">
+						</FooterInfoDetailA>
+						<FooterInfoDetailA id="footerblue">
 							유료상품 이용약관
-						</FooterInfoDetail>
-						<FooterInfoDetail id="footerblue">FAQ</FooterInfoDetail>
-						<FooterInfoDetail id="footerblue">
+						</FooterInfoDetailA>
+						<FooterInfoDetailA id="footerblue">
+							FAQ
+						</FooterInfoDetailA>
+						<FooterInfoDetailA id="footerblue">
 							개인정보 처리방침
-						</FooterInfoDetail>
+						</FooterInfoDetailA>
 					</FooterInfoColumn>
 				</FooterColumnLeft>
 				<FooterColumnRight>

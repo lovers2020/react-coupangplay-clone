@@ -1,14 +1,18 @@
+import { MdNavigateBefore } from "react-icons/md";
+import { MdNavigateNext } from "react-icons/md";
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { CreateImagePath } from "../utils/utils";
-import { Slider } from "@chakra-ui/react";
 import {
 	Detail,
 	MainBg,
 	MainBgDetail,
 	MainBgImg,
 	MainBgTitle,
+	NextBtn,
 	PlayBtn,
+	PrevBtn,
+	Slider,
 	Wrapper,
 	rowVaritants,
 } from "./style/BannerStyles";
@@ -19,12 +23,20 @@ import { getTvDetail } from "../API";
 import { Loading } from "../style/HomeStyles";
 
 export function Banner({ data }: any) {
+	const [dir, setDir] = useState(1);
 	const [index, setIndex] = useState(0);
 	const [leaving, setLeaving] = useState(false);
 	function IncreaseIndex() {
 		if (leaving) return;
 		setLeaving(true);
+		setDir(1);
 		setIndex((prev) => (prev === 12 ? (prev = 0) : prev + 1));
+	}
+	function DecreaseIndex() {
+		if (leaving) return;
+		setLeaving(true);
+		setDir(-1);
+		setIndex((prev) => (prev === 0 ? (prev = 12) : prev - 1));
 	}
 	const toggleLeaving = () => {
 		setLeaving((prev) => !prev);
@@ -55,12 +67,16 @@ export function Banner({ data }: any) {
 				<Loading>Loading..</Loading>
 			) : (
 				<Slider>
+					<NextBtn onClick={IncreaseIndex}>
+						<MdNavigateNext />
+					</NextBtn>
 					<AnimatePresence
 						initial={false}
 						onExitComplete={toggleLeaving}
+						custom={dir}
 					>
 						<Wrapper
-							onClick={IncreaseIndex}
+							custom={dir}
 							variants={rowVaritants}
 							initial="hidden"
 							animate="visible"
@@ -92,12 +108,23 @@ export function Banner({ data }: any) {
 													•
 													{
 														<span>
-															{genres} • {runtime}
+															{genres} •{" "}
+															{runtime
+																? runtime
+																: "40"}
 															분
 														</span>
 													}
 												</Detail>
-												<PlayBtn></PlayBtn>
+												<PlayBtn>
+													<svg
+														viewBox="0 0 448 512"
+														xmlns="http://www.w3.org/2000/svg"
+													>
+														<path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+													</svg>
+													<span>재생하기</span>
+												</PlayBtn>
 											</MainBgDetail>
 											<MainBgImg
 												key={current}
@@ -110,6 +137,10 @@ export function Banner({ data }: any) {
 								))}
 						</Wrapper>
 					</AnimatePresence>
+
+					<PrevBtn onClick={DecreaseIndex}>
+						<MdNavigateBefore />
+					</PrevBtn>
 				</Slider>
 			)}
 		</>
