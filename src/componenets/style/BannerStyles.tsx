@@ -101,6 +101,26 @@ export const PrevBtn = styled.button`
 	color: white;
 	cursor: pointer;
 `;
+export const PageDotsContainer = styled.div`
+	width: 100%;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+export const PageDots = styled.button<{ index: number }>`
+	width: 10px;
+	height: 10px;
+	border: none;
+	border-radius: 50%;
+	margin: 0 8px;
+	padding: 0;
+	cursor: pointer;
+	background-color: rgba(255, 255, 255, 0.5);
+	&:nth-child(${(props) => props.index + 1}) {
+		background-color: white;
+	}
+`;
 
 export const rowVaritants = {
 	hidden: (dir: number) => ({

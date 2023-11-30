@@ -10,6 +10,8 @@ import {
 	MainBgImg,
 	MainBgTitle,
 	NextBtn,
+	PageDots,
+	PageDotsContainer,
 	PlayBtn,
 	PrevBtn,
 	Slider,
@@ -23,26 +25,35 @@ import { getTvDetail } from "../API";
 import { Loading } from "../style/HomeStyles";
 
 export function Banner({ data }: any) {
+	const pageLength = 11;
 	const [dir, setDir] = useState(1);
 	const [index, setIndex] = useState(0);
 	const [leaving, setLeaving] = useState(false);
+	const id = data.results[index].id;
+
 	function IncreaseIndex() {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(1);
-		setIndex((prev) => (prev === 12 ? (prev = 0) : prev + 1));
+		setIndex((prev) => (prev === pageLength ? (prev = 0) : prev + 1));
 	}
 	function DecreaseIndex() {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(-1);
-		setIndex((prev) => (prev === 0 ? (prev = 12) : prev - 1));
+		setIndex((prev) => (prev === 0 ? (prev = pageLength) : prev - 1));
 	}
 	const toggleLeaving = () => {
 		setLeaving((prev) => !prev);
 	};
+	function changeIndex(pageNumber: number) {
+		if (pageNumber > index) setDir(1);
+		else setDir(-1);
 
-	const id = data.results[index].id;
+		setLeaving((prev) => !prev);
+		setIndex(pageNumber);
+	}
+
 	const {
 		data: tvDetail,
 		isLoading: tvDetailisLoading,
@@ -60,7 +71,7 @@ export function Banner({ data }: any) {
 		refetch();
 	}, [index]);
 	getDetails();
-
+	console.log(index, leaving);
 	return (
 		<>
 			{tvDetailisLoading ? (
@@ -89,7 +100,7 @@ export function Banner({ data }: any) {
 								.map((current: any) => (
 									<>
 										<MainBg>
-											<MainBgDetail>
+											<MainBgDetail key={index}>
 												<MainBgTitle>
 													{current.name}
 												</MainBgTitle>
@@ -133,6 +144,22 @@ export function Banner({ data }: any) {
 												)}
 											></MainBgImg>
 										</MainBg>
+
+										<PageDotsContainer>
+											<>
+												{[
+													0, 1, 2, 3, 4, 5, 6, 7, 8,
+													9, 10, 11,
+												].map((i) => (
+													<PageDots
+														onClick={() =>
+															changeIndex(i)
+														}
+														index={index}
+													></PageDots>
+												))}
+											</>
+										</PageDotsContainer>
 									</>
 								))}
 						</Wrapper>
