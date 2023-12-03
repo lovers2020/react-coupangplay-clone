@@ -10,6 +10,7 @@ import Tv from "./screen/Tv";
 import LikedContents from "./screen/LikedContents";
 import { Helmet } from "react-helmet";
 import Search from "./screen/Search";
+import { DetailScreen } from "./screen/DetailScreen";
 
 const router = createBrowserRouter(
 	[
@@ -25,6 +26,10 @@ const router = createBrowserRouter(
 				{
 					path: "tv",
 					element: <Tv />,
+				},
+				{
+					path: ":tvid",
+					element: <DetailScreen />,
 				},
 				{
 					path: "movies",

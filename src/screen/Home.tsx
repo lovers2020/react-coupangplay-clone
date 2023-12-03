@@ -29,8 +29,15 @@ export default function Home() {
 					<Banner data={tvTopRated}></Banner>
 					<Category key="category"></Category>
 					<Wrapper>
-						<PopularTop20 data={tvPopular}></PopularTop20>
-						<Slider data={tvAiring}></Slider>
+						<PopularTop20
+							data={tvPopular}
+							category="tv"
+						></PopularTop20>
+						<Slider
+							data={tvAiring}
+							title="새로운 에피소드"
+							category="tv"
+						></Slider>
 					</Wrapper>
 				</>
 			)}

@@ -48,14 +48,20 @@ export const PoularBoxImg = styled.div<{ bgphoto: string }>`
 	background-image: url(${(props) => props.bgphoto});
 	background-size: 180px 225px;
 	cursor: pointer;
+	transform-origin: center bottom;
 	&:hover {
-		transition: scale 0.3s linear;
-		z-index: 3;
 		div {
 			display: flex;
 		}
+		transition: scale 0.3s linear;
+		z-index: 3;
 		scale: 1.4;
-		transform-origin: center bottom;
+		&:first-child {
+			transform-origin: left bottom;
+		}
+		&:last-child {
+			transform-origin: right bottom;
+		}
 	}
 `;
 export const RankNumber = styled.span`

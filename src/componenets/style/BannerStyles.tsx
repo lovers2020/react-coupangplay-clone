@@ -16,7 +16,11 @@ export const Wrapper = styled(motion.div)`
 export const MainBg = styled.div`
 	display: flex;
 `;
-export const MainBgImg = styled.div<{ bgphoto: string }>`
+export const MainBgImg = styled.div<{
+	bgphoto: string;
+	width: string;
+	height: string;
+}>`
 	background-image: linear-gradient(
 			to right,
 			black,
@@ -27,9 +31,9 @@ export const MainBgImg = styled.div<{ bgphoto: string }>`
 		linear-gradient(to left, black, 2%, rgba(0, 0, 0, 0) 15%),
 		linear-gradient(to top, black, 5%, rgba(0, 0, 0, 0) 15%),
 		url(${(props) => props.bgphoto});
-	background-size: cover;
-	width: 65%;
-	height: 800px;
+	background-size: 100% 100%;
+	width: ${(props) => props.width};
+	height: ${(props) => props.height};
 `;
 export const MainBgDetail = styled.div`
 	display: flex;

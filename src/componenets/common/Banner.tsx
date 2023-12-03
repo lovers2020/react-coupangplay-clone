@@ -140,6 +140,8 @@ export function Banner({ data }: any) {
 												bgphoto={CreateImagePath(
 													current.backdrop_path
 												)}
+												width="65%"
+												height="800px"
 											></MainBgImg>
 										</MainBg>
 

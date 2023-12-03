@@ -16,10 +16,11 @@ import { AnimatePresence } from "framer-motion";
 import { CreateImagePath } from "../utils/utils";
 
 import GetDetail from "./common/getDetail";
+import { Link } from "react-router-dom";
 
 /* vote_avg, name, id, backdrop, poster */
 
-export default function PopularTop20({ data }: any) {
+export default function PopularTop20({ data, category }: any) {
 	const [dir, setDir] = useState(1);
 	const [startIndex, setStartIndex] = useState(0);
 	const [endIndex, setEndIndex] = useState(8);
@@ -87,20 +88,22 @@ export default function PopularTop20({ data }: any) {
 								.slice(startIndex, endIndex)
 								.map((current: any, i: number) => (
 									<>
-										<PoularBoxImg
-											key={current.id}
-											bgphoto={CreateImagePath(
-												current.poster_path,
-												"w185"
-											)}
-										>
-											<RankNumber>
-												{startIndex + i + 1}
-											</RankNumber>
-											<GetDetail
-												id={current.id}
-											></GetDetail>
-										</PoularBoxImg>
+										<Link to={category + current.id}>
+											<PoularBoxImg
+												key={current.id}
+												bgphoto={CreateImagePath(
+													current.poster_path,
+													"w185"
+												)}
+											>
+												<RankNumber>
+													{startIndex + i + 1}
+												</RankNumber>
+												<GetDetail
+													id={current.id}
+												></GetDetail>
+											</PoularBoxImg>
+										</Link>
 									</>
 								))}
 						</PopularWrapper>

@@ -5,11 +5,9 @@ import { getTvDetail } from "../../API";
 import { Detail, DetailInfo } from "../style/Detail";
 
 export default function GetDetail({ id }: any) {
-	console.log(id);
 	const { data: tvDetail, isLoading: tvDetailisLoading } =
 		useQuery<ITvDetails>(["tvDetail", id], () => getTvDetail(id));
 
-	console.log(tvDetail);
 	return (
 		<>
 			{tvDetailisLoading ? null : (

@@ -11,10 +11,11 @@ import { NextBtn, PrevBtn } from "./style/SliderStyles";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import { CreateImagePath } from "../utils/utils";
 import GetDetail from "./common/getDetail";
+import { Link } from "react-router-dom";
 
 const offset = 6;
 
-export default function Slider({ data }: any) {
+export default function Slider({ data, title, category }: any) {
 	const sliderLength = data.results.length;
 	const [dir, setDir] = useState(1);
 	const [index, setIndex] = useState(0);
@@ -24,13 +25,13 @@ export default function Slider({ data }: any) {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(1);
-		setIndex((prev) => (prev === 1 ? (prev = 0) : prev + 1));
+		setIndex((prev) => (prev === 2 ? (prev = 0) : prev + 1));
 	}
 	function DecreaseIndex() {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(-1);
-		setIndex((prev) => (prev === 0 ? (prev = 1) : prev - 1));
+		setIndex((prev) => (prev === 0 ? (prev = 2) : prev - 1));
 	}
 	function toggleLeaving() {
 		setLeaving((prev) => !prev);
@@ -40,7 +41,7 @@ export default function Slider({ data }: any) {
 		<>
 			{!data ? null : (
 				<SliderContainer>
-					<Title>새로운 에피소드</Title>
+					<Title>{title}</Title>
 
 					<NextBtn onClick={IncreaseIndex}>
 						<MdNavigateNext />
@@ -61,21 +62,23 @@ export default function Slider({ data }: any) {
 						>
 							{data.results
 								.slice(index * offset, index * offset + offset)
-								.map((current: any, i: number) => (
+								.map((current: any) => (
 									<>
-										<SliderBox
-											key={current.id}
-											bgphoto={CreateImagePath(
-												current.backdrop_path
-													? current.backdrop_path
-													: current.poster_path,
-												"w500"
-											)}
-										>
-											<GetDetail
-												id={current.id}
-											></GetDetail>
-										</SliderBox>
+										<Link to={category + current.id}>
+											<SliderBox
+												key={category + current.id}
+												bgphoto={CreateImagePath(
+													current.backdrop_path
+														? current.backdrop_path
+														: current.poster_path,
+													"w500"
+												)}
+											>
+												<GetDetail
+													id={current.id}
+												></GetDetail>
+											</SliderBox>
+										</Link>
 									</>
 								))}
 						</SliderWrapper>

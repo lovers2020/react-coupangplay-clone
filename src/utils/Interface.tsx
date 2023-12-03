@@ -3,6 +3,7 @@ export interface ITvDetails {
 	id: number;
 	title: string;
 	vote_average: number;
+	overview: string;
 	genres: [
 		{
 			id: number;
@@ -14,6 +15,13 @@ export interface ITvDetails {
 		runtime: number;
 	};
 	first_air_date: string;
+	backdrop_path: string;
+	poster_path: string;
+	created_by: [
+		{
+			profile_path: string;
+		}
+	];
 }
 
 export interface ICommonInfo {

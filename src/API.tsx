@@ -30,3 +30,8 @@ export function getTvAiringToday() {
 		options
 	).then((response) => response.json());
 }
+export function getTvImage(id: number) {
+	return fetch(`https://api.themoviedb.org/3/tv/${id}/images`, options).then(
+		(response) => response.json()
+	);
+}
