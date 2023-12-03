@@ -16,12 +16,29 @@ export const PopularWrapper = styled(motion.div)`
 	grid-template-columns: repeat(8, 1fr);
 	padding-left: 100px;
 	gap: 20px;
+	a {
+		width: 180px;
+		height: 225px;
+	}
+	a:hover {
+		transform-origin: center bottom;
+		div {
+			display: flex;
+		}
+		transition: scale 0.3s linear;
+		z-index: 3;
+		scale: 1.3;
+		&:first-child {
+			transform-origin: left bottom;
+		}
+		&:last-child {
+			transform-origin: right bottom;
+		}
+	}
 `;
 
 export const PopularBox = styled(motion.div)`
 	position: relative;
-	width: 180px;
-	height: 225px;
 	border-radius: 10px;
 	background-color: blue;
 `;
@@ -29,12 +46,13 @@ export const BoxDetail = styled(motion.div)`
 	font-size: 14px;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	color: white;
 	background-color: #141414;
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	height: 60px;
+	height: 80px;
 	padding: 10px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
@@ -48,21 +66,6 @@ export const PoularBoxImg = styled.div<{ bgphoto: string }>`
 	background-image: url(${(props) => props.bgphoto});
 	background-size: 180px 225px;
 	cursor: pointer;
-	transform-origin: center bottom;
-	&:hover {
-		div {
-			display: flex;
-		}
-		transition: scale 0.3s linear;
-		z-index: 3;
-		scale: 1.4;
-		&:first-child {
-			transform-origin: left bottom;
-		}
-		&:last-child {
-			transform-origin: right bottom;
-		}
-	}
 `;
 export const RankNumber = styled.span`
 	color: black;

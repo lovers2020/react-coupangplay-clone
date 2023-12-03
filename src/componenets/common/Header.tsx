@@ -1,6 +1,6 @@
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
 	HeaderContainer,
 	HeaderLogo,
@@ -23,7 +23,7 @@ const headerTitle: string[] = [
 	"찜한 콘텐츠",
 ];
 const headerTitleEng: string[] = [
-	"tv",
+	"/",
 	"movies",
 	"sports",
 	"store",
@@ -40,6 +40,8 @@ const profileDetail: string[] = [
 	"로그아웃",
 ];
 export default function Header() {
+	let location = useLocation().pathname;
+	location = location === "/" ? "/" : location.slice(1);
 	const { scrollY } = useScroll();
 	const scrollAnimation = useAnimation();
 	useMotionValueEvent(scrollY, "change", (y) => {
@@ -75,10 +77,12 @@ export default function Header() {
 					</button>
 				</HeaderTitleLeft>
 				<HeaderRow>
-					{[0, 1, 2, 3, 4, 5, 6].map((current, index) => (
-						<HeaderTitleLeft key={index}>
+					{[0, 1, 2, 3, 4, 5, 6].map((current) => (
+						<HeaderTitleLeft
+							location={location === headerTitleEng[current]}
+						>
 							<Link
-								to={`${headerTitleEng[current]}`}
+								to={headerTitleEng[current]}
 								style={{ display: "block", padding: "1rem" }}
 							>
 								{headerTitle[current]}

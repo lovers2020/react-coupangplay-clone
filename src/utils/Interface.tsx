@@ -1,4 +1,5 @@
-export interface ITvDetails {
+export interface IDetails {
+	release_date: string;
 	name: string;
 	id: number;
 	title: string;
@@ -22,8 +23,8 @@ export interface ITvDetails {
 			profile_path: string;
 		}
 	];
+	runtime: number;
 }
-
 export interface ICommonInfo {
 	backdrop_path: string;
 	poster_path: string;

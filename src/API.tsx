@@ -18,15 +18,27 @@ export function getTvPopular() {
 		options
 	).then((response) => response.json());
 }
-export function getTvDetail(id: number) {
+export function getTvAiringToday() {
 	return fetch(
-		`https://api.themoviedb.org/3/tv/${id}}?language=ko-KR`,
+		"https://api.themoviedb.org/3/tv/airing_today?language=ko-KR&page=1",
 		options
 	).then((response) => response.json());
 }
-export function getTvAiringToday() {
+export function getTvOnTheAir() {
 	return fetch(
-		"https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1",
+		"https://api.themoviedb.org/3/tv/on_the_air?language=ko-KR&page=2",
+		options
+	).then((response) => response.json());
+}
+export function getTvDetail(id: number) {
+	return fetch(
+		`https://api.themoviedb.org/3/tv/${id}?language=ko-KR`,
+		options
+	).then((response) => response.json());
+}
+export function getTvDetailEn(id: number) {
+	return fetch(
+		`https://api.themoviedb.org/3/tv/${id}?language=en-US`,
 		options
 	).then((response) => response.json());
 }
@@ -34,4 +46,54 @@ export function getTvImage(id: number) {
 	return fetch(`https://api.themoviedb.org/3/tv/${id}/images`, options).then(
 		(response) => response.json()
 	);
+}
+
+// Movie
+export function getMovieNow() {
+	return fetch(
+		"https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=1",
+		options
+	).then((response) => response.json());
+}
+export function getMoviePopular() {
+	return fetch(
+		"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1",
+		options
+	).then((response) => response.json());
+}
+export function getMovieUpcoming() {
+	return fetch(
+		"https://api.themoviedb.org/3/movie/upcoming?language=ko-KR&page=1",
+		options
+	).then((response) => response.json());
+}
+export function getMovieTopRated() {
+	return fetch(
+		"https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1",
+		options
+	).then((response) => response.json());
+}
+export function getMovieDetail(id: number) {
+	return fetch(
+		`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`,
+		options
+	).then((response) => response.json());
+}
+export function getMovieDetailEn(id: number) {
+	return fetch(
+		`https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+		options
+	).then((response) => response.json());
+}
+export function getMovieImage(id: number) {
+	return fetch(
+		`https://api.themoviedb.org/3/movie/${id}/images`,
+		options
+	).then((response) => response.json());
+}
+export function getSearch(id: string) {
+	return fetch(
+		`https://api.themoviedb.org/3/search/multi?query=${id}&include_adult=false&language=en-US&page=1`,
+		options
+	).then((response) => response.json());
 }

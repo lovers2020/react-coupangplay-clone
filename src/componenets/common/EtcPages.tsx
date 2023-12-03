@@ -4,7 +4,7 @@ const EtcContainter = styled.div`
 	position: relative;
 	width: 100%;
 	height: 100vh;
-	background-color: #141414;
+	background-color: black;
 	color: white;
 	display: flex;
 	p {
