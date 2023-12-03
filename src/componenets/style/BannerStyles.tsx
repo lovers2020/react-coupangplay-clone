@@ -44,19 +44,6 @@ export const MainBgTitle = styled.span`
 	color: white;
 	font-size: 48px;
 `;
-export const Detail = styled.p`
-	margin: 1.5rem 0;
-	color: white;
-	font-size: 20px;
-	svg {
-		width: 24px;
-		height: 24px;
-		fill: #00a7f6;
-	}
-	span {
-		margin: 0 5px;
-	}
-`;
 export const PlayBtn = styled.div`
 	display: flex;
 	justify-content: center;
@@ -79,28 +66,6 @@ export const PlayBtn = styled.div`
 		fill: white;
 	}
 `;
-export const NextBtn = styled.button`
-	position: absolute;
-	top: 45%;
-	right: 0;
-	z-index: 1;
-	background-color: transparent;
-	border: none;
-	font-size: 48px;
-	color: white;
-	cursor: pointer;
-`;
-export const PrevBtn = styled.button`
-	position: absolute;
-	top: 45%;
-	left: 0;
-	z-index: 1;
-	background-color: transparent;
-	border: none;
-	font-size: 48px;
-	color: white;
-	cursor: pointer;
-`;
 export const PageDotsContainer = styled.div`
 	width: 100%;
 	margin: auto;
@@ -121,15 +86,3 @@ export const PageDots = styled.button<{ index: number }>`
 		background-color: white;
 	}
 `;
-
-export const rowVaritants = {
-	hidden: (dir: number) => ({
-		x: window.outerWidth * dir,
-	}),
-	visible: {
-		x: 0,
-	},
-	exit: (dir: number) => ({
-		x: -window.outerWidth * dir,
-	}),
-};

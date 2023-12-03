@@ -1,10 +1,10 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Layout from "./componenets/Layout";
-import NotFound from "./componenets/Notfound";
+import Layout from "./componenets/common/Layout";
+import NotFound from "./componenets/common/Notfound";
 import Home from "./screen/Home";
-import { EtcPages } from "./componenets/EtcPages";
+import { EtcPages } from "./componenets/common/EtcPages";
 import Movie from "./screen/Movie";
 import Tv from "./screen/Tv";
 import LikedContents from "./screen/LikedContents";

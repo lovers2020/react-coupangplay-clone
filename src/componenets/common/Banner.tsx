@@ -2,27 +2,25 @@ import { MdNavigateBefore } from "react-icons/md";
 import { MdNavigateNext } from "react-icons/md";
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
-import { CreateImagePath } from "../utils/utils";
+import { CreateImagePath } from "../../utils/utils";
 import {
-	Detail,
 	MainBg,
 	MainBgDetail,
 	MainBgImg,
 	MainBgTitle,
-	NextBtn,
 	PageDots,
 	PageDotsContainer,
 	PlayBtn,
-	PrevBtn,
 	Slider,
 	Wrapper,
-	rowVaritants,
-} from "./style/BannerStyles";
+} from "../style/BannerStyles";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { ITvDetails } from "../utils/Interface";
-import { getTvDetail } from "../API";
-import { Loading } from "../style/HomeStyles";
+import { ITvDetails } from "../../utils/Interface";
+import { getTvDetail } from "../../API";
+import { Loading } from "../../style/HomeStyles";
+import { NextBtn, PrevBtn, rowVaritants } from "../style/SliderStyles";
+import { Detail } from "../style/Detail";
 
 export function Banner({ data }: any) {
 	const pageLength = 11;
@@ -31,6 +29,11 @@ export function Banner({ data }: any) {
 	const [leaving, setLeaving] = useState(false);
 	const id = data.results[index].id;
 
+	const {
+		data: tvDetail,
+		isLoading: tvDetailisLoading,
+		refetch,
+	} = useQuery<ITvDetails>("tvDetailInBanner", () => getTvDetail(id));
 	function IncreaseIndex() {
 		if (leaving) return;
 		setLeaving(true);
@@ -43,9 +46,9 @@ export function Banner({ data }: any) {
 		setDir(-1);
 		setIndex((prev) => (prev === 0 ? (prev = pageLength) : prev - 1));
 	}
-	const toggleLeaving = () => {
+	function toggleLeaving() {
 		setLeaving((prev) => !prev);
-	};
+	}
 	function changeIndex(pageNumber: number) {
 		if (pageNumber > index) setDir(1);
 		else setDir(-1);
@@ -54,24 +57,19 @@ export function Banner({ data }: any) {
 		setIndex(pageNumber);
 	}
 
-	const {
-		data: tvDetail,
-		isLoading: tvDetailisLoading,
-		refetch,
-	} = useQuery<ITvDetails>("tvDetail", () => getTvDetail(id));
 	let genres = "";
 	let runtime = 0;
-	const getDetails = () => {
+	function getDetails() {
 		if (!tvDetailisLoading && tvDetail) {
 			genres = tvDetail.genres[0].name;
 			runtime = tvDetail.last_episode_to_air.runtime;
 		}
-	};
+	}
 	useEffect(() => {
 		refetch();
 	}, [index]);
 	getDetails();
-	console.log(index, leaving);
+
 	return (
 		<>
 			{tvDetailisLoading ? (
@@ -91,7 +89,7 @@ export function Banner({ data }: any) {
 							variants={rowVaritants}
 							initial="hidden"
 							animate="visible"
-							transition={{ type: "tween", duration: 1 }}
+							transition={{ type: "tween", duration: 0.7 }}
 							exit="exit"
 							key={index}
 						>

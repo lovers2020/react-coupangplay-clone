@@ -12,9 +12,21 @@ export function getTvTopRated() {
 		options
 	).then((response) => response.json());
 }
+export function getTvPopular() {
+	return fetch(
+		"https://api.themoviedb.org/3/tv/popular?language=ko-KR&page=1",
+		options
+	).then((response) => response.json());
+}
 export function getTvDetail(id: number) {
 	return fetch(
 		`https://api.themoviedb.org/3/tv/${id}}?language=ko-KR`,
+		options
+	).then((response) => response.json());
+}
+export function getTvAiringToday() {
+	return fetch(
+		"https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1",
 		options
 	).then((response) => response.json());
 }

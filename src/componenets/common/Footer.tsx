@@ -5,7 +5,7 @@ import {
 	FooterInfoColumn,
 	FooterInfoDetail,
 	FooterInfoDetailA,
-} from "./../style/FooterStyles";
+} from "../style/FooterStyles";
 
 export default function Footer() {
 	function onLogoClick() {
