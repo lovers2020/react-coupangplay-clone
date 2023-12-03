@@ -22,27 +22,27 @@ export const HeaderRow = styled.ul`
 	font-size: 18px;
 	font-weight: 500;
 	color: white;
+	border-bottom: none;
 `;
-export const HeaderTitleLeft = styled(motion.li)`
+export const HeaderTitleLeft = styled.li<{ location?: boolean }>`
 	height: 100%;
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	background-color: transparent;
 	margin-right: 8px;
 	cursor: pointer;
 	a {
 		text-decoration: none;
 		color: white;
+		border-bottom: ${(props) =>
+			props.location ? "2px solid white" : "none"};
 	}
-	&:hover,
-	&:focus-within {
+	&:hover {
 		a {
 			border-bottom: 2px solid white;
 		}
 	}
 `;
-export const HeaderTitleRight = styled(motion.li)`
+export const HeaderTitleRight = styled(motion.div)`
 	height: 100%;
 	display: flex;
 	justify-content: center;

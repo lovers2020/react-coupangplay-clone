@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 const offset = 6;
 
 export default function Slider({ data, title, category }: any) {
-	const sliderLength = data.results.length;
 	const [dir, setDir] = useState(1);
 	const [index, setIndex] = useState(0);
 	const [leaving, setLeaving] = useState(false);

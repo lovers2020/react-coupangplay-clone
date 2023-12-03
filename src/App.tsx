@@ -6,7 +6,6 @@ import NotFound from "./componenets/common/Notfound";
 import Home from "./screen/Home";
 import { EtcPages } from "./componenets/common/EtcPages";
 import Movie from "./screen/Movie";
-import Tv from "./screen/Tv";
 import LikedContents from "./screen/LikedContents";
 import { Helmet } from "react-helmet";
 import Search from "./screen/Search";
@@ -24,16 +23,16 @@ const router = createBrowserRouter(
 					element: <Home />,
 				},
 				{
-					path: "tv",
-					element: <Tv />,
-				},
-				{
 					path: ":tvid",
 					element: <DetailScreen />,
 				},
 				{
 					path: "movies",
 					element: <Movie />,
+				},
+				{
+					path: "movies/:moviesid",
+					element: <DetailScreen />,
 				},
 				{
 					path: "sports",

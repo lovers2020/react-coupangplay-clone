@@ -51,6 +51,8 @@ export const AddLike = styled.div`
 `;
 
 export const OverView = styled.span`
+	width: 97%;
+	color: white;
 	margin: 20px 0;
 	font-size: 20px;
 	font-weight: 400;

@@ -1,6 +1,5 @@
 import { MdNavigateBefore } from "react-icons/md";
 import { MdNavigateNext } from "react-icons/md";
-import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { CreateImagePath } from "../../utils/utils";
 import {
@@ -14,26 +13,29 @@ import {
 	Slider,
 	Wrapper,
 } from "../style/BannerStyles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
-import { ITvDetails } from "../../utils/Interface";
-import { getTvDetail } from "../../API";
+import { IDetails } from "../../utils/Interface";
+import { getMovieDetail, getTvDetail } from "../../API";
 import { Loading } from "../../style/HomeStyles";
 import { NextBtn, PrevBtn, rowVaritants } from "../style/SliderStyles";
-import { Detail } from "../style/Detail";
+import { Detail } from "../style/DetailStyles";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function Banner({ data }: any) {
+	const location = useLocation().pathname.slice(0);
 	const pageLength = 11;
 	const [dir, setDir] = useState(1);
 	const [index, setIndex] = useState(0);
 	const [leaving, setLeaving] = useState(false);
 	const id = data.results[index].id;
 
-	const {
-		data: tvDetail,
-		isLoading: tvDetailisLoading,
-		refetch,
-	} = useQuery<ITvDetails>("tvDetailInBanner", () => getTvDetail(id));
+	const { data: movieDetailInBanner, isLoading: movieDetailisLoading } =
+		useQuery<IDetails>("movieDetailInBanner", () => getMovieDetail(id));
+	const { data: tvDetailInBanner, isLoading: tvDetailInBannerisLoading } =
+		useQuery<IDetails>("tvDetailInBanner", () => getTvDetail(id));
+
 	function IncreaseIndex() {
 		if (leaving) return;
 		setLeaving(true);
@@ -52,27 +54,27 @@ export function Banner({ data }: any) {
 	function changeIndex(pageNumber: number) {
 		if (pageNumber > index) setDir(1);
 		else setDir(-1);
-
 		setLeaving((prev) => !prev);
 		setIndex(pageNumber);
 	}
 
 	let genres = "";
 	let runtime = 0;
-	function getDetails() {
-		if (!tvDetailisLoading && tvDetail) {
-			genres = tvDetail.genres[0].name;
-			runtime = tvDetail.last_episode_to_air.runtime;
-		}
+	if (!tvDetailInBannerisLoading && tvDetailInBanner && location === "/") {
+		genres = tvDetailInBanner.genres[0].name;
+		runtime = tvDetailInBanner.last_episode_to_air.runtime;
+	} else if (
+		!movieDetailisLoading &&
+		movieDetailInBanner &&
+		location === "/movies"
+	) {
+		genres = movieDetailInBanner.genres[0].name;
+		runtime = movieDetailInBanner.runtime;
 	}
-	useEffect(() => {
-		refetch();
-	}, [index]);
-	getDetails();
-
+	console.log(data);
 	return (
 		<>
-			{tvDetailisLoading ? (
+			{tvDetailInBannerisLoading || movieDetailisLoading ? (
 				<Loading>Loading..</Loading>
 			) : (
 				<Slider>
@@ -100,7 +102,9 @@ export function Banner({ data }: any) {
 										<MainBg>
 											<MainBgDetail key={index}>
 												<MainBgTitle>
-													{current.name}
+													{current.name
+														? current.name
+														: current.title}
 												</MainBgTitle>
 												<Detail>
 													<svg
@@ -125,15 +129,17 @@ export function Banner({ data }: any) {
 														</span>
 													}
 												</Detail>
-												<PlayBtn>
-													<svg
-														viewBox="0 0 448 512"
-														xmlns="http://www.w3.org/2000/svg"
-													>
-														<path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
-													</svg>
-													<span>재생하기</span>
-												</PlayBtn>
+												<Link to={current}>
+													<PlayBtn>
+														<svg
+															viewBox="0 0 448 512"
+															xmlns="http://www.w3.org/2000/svg"
+														>
+															<path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+														</svg>
+														<span>재생하기</span>
+													</PlayBtn>
+												</Link>
 											</MainBgDetail>
 											<MainBgImg
 												key={current}

@@ -16,22 +16,16 @@ export const SliderWrapper = styled(motion.div)`
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
 	gap: 10px;
-`;
-export const SliderBox = styled.div<{ bgphoto: string }>`
-	height: 180px;
-	border-radius: 5px;
-	background-image: url(${(props) => props.bgphoto});
-	object-fit: contain;
-	background-size: 100% 180px;
-	cursor: pointer;
-	transform-origin: center bottom;
-	&:hover {
+	a {
+	}
+	a:hover {
+		transform-origin: center bottom;
 		div {
 			display: flex;
 		}
 		transition: scale 0.3s linear;
 		z-index: 3;
-		scale: 1.2;
+		scale: 1.3;
 		&:first-child {
 			transform-origin: left bottom;
 		}
@@ -39,6 +33,14 @@ export const SliderBox = styled.div<{ bgphoto: string }>`
 			transform-origin: right bottom;
 		}
 	}
+`;
+export const SliderBox = styled.div<{ bgphoto: string }>`
+	height: 220px;
+	border-radius: 5px;
+	background-image: url(${(props) => props.bgphoto});
+	object-fit: contain;
+	background-size: 100% 220px;
+	cursor: pointer;
 `;
 export const NextBtn = styled.button`
 	height: 100%;
