@@ -10,7 +10,6 @@ export const FooterContainer = styled.div`
 	padding: 4rem 0;
 	margin: 0 auto;
 `;
-
 export const FooterColumnLeft = styled.div`
 	gap: 10px;
 	button {
@@ -29,11 +28,17 @@ export const FooterColumnRight = styled.div`
 	}
 `;
 export const FooterInfoColumn = styled.ul`
+	display: flex;
+	flex-direction: column;
 	#footerblue {
 		color: #0097f6;
 		cursor: pointer;
 	}
 `;
 export const FooterInfoDetail = styled.li`
+	margin: 5px 0;
+`;
+export const FooterInfoDetailA = styled.a`
+	width: 50%;
 	margin: 5px 0;
 `;

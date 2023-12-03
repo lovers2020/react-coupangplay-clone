@@ -5,6 +5,7 @@ import { createGlobalStyle } from "styled-components";
 import { reset } from "styled-reset";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { RecoilRoot } from "recoil";
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -33,12 +34,12 @@ const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement
 );
 root.render(
-	<React.StrictMode>
+	<RecoilRoot>
 		<HelmetProvider>
 			<QueryClientProvider client={queryClient}>
 				<GlobalStyle />
 				<App />
 			</QueryClientProvider>
 		</HelmetProvider>
-	</React.StrictMode>
+	</RecoilRoot>
 );
