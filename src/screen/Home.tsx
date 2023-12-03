@@ -13,26 +13,14 @@ import { ICommonInfo } from "../utils/Interface";
 import Slider from "../componenets/Slider";
 
 export default function Home() {
-	const {
-		data: tvTopRated,
-		isLoading: tvTopRatedisLoading,
-		refetch: tvToprefetch,
-	} = useQuery<ICommonInfo>("tvTop", getTvTopRated);
-	const {
-		data: tvPopular,
-		isLoading: tvPopularisLoading,
-		refetch: tvPoprefetch,
-	} = useQuery<ICommonInfo>("tvPop", getTvPopular);
-	const {
-		data: tvAiring,
-		isLoading: tvAiringisLoading,
-		refetch: tvAirrefetch,
-	} = useQuery<ICommonInfo>("tvAir", getTvAiringToday);
-	const {
-		data: tvOnTheAir,
-		isLoading: tvOnTheAirisLoading,
-		refetch: tvOnTherefetch,
-	} = useQuery<ICommonInfo>("tvOnTheAir", getTvOnTheAir);
+	const { data: tvTopRated, isLoading: tvTopRatedisLoading } =
+		useQuery<ICommonInfo>("tvTop", getTvTopRated);
+	const { data: tvPopular, isLoading: tvPopularisLoading } =
+		useQuery<ICommonInfo>("tvPop", getTvPopular);
+	const { data: tvAiring, isLoading: tvAiringisLoading } =
+		useQuery<ICommonInfo>("tvAir", getTvAiringToday);
+	const { data: tvOnTheAir, isLoading: tvOnTheAirisLoading } =
+		useQuery<ICommonInfo>("tvOnTheAir", getTvOnTheAir);
 
 	return (
 		<>

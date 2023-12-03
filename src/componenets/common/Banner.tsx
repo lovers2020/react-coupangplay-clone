@@ -13,18 +13,19 @@ import {
 	Slider,
 	Wrapper,
 } from "../style/BannerStyles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { IDetails } from "../../utils/Interface";
 import { getMovieDetail, getTvDetail } from "../../API";
 import { Loading } from "../../style/HomeStyles";
 import { NextBtn, PrevBtn, rowVaritants } from "../style/SliderStyles";
 import { Detail } from "../style/DetailStyles";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export function Banner({ data }: any) {
 	const location = useLocation().pathname.slice(0);
+	const path = location === "/" ? "tv" : "movies";
 	const pageLength = 11;
 	const [dir, setDir] = useState(1);
 	const [index, setIndex] = useState(0);
@@ -71,7 +72,6 @@ export function Banner({ data }: any) {
 		genres = movieDetailInBanner.genres[0].name;
 		runtime = movieDetailInBanner.runtime;
 	}
-	console.log(data);
 	return (
 		<>
 			{tvDetailInBannerisLoading || movieDetailisLoading ? (
@@ -129,7 +129,9 @@ export function Banner({ data }: any) {
 														</span>
 													}
 												</Detail>
-												<Link to={current}>
+												<Link
+													to={path + `${current.id}`}
+												>
 													<PlayBtn>
 														<svg
 															viewBox="0 0 448 512"

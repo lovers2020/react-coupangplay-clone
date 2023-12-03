@@ -43,6 +43,9 @@ export const MainBgDetail = styled.div`
 	padding-left: 6rem;
 	width: 35%;
 	height: 800px;
+	a {
+		text-decoration: none;
+	}
 `;
 export const MainBgTitle = styled.span`
 	color: white;

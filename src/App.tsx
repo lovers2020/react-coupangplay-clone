@@ -10,6 +10,7 @@ import LikedContents from "./screen/LikedContents";
 import { Helmet } from "react-helmet";
 import Search from "./screen/Search";
 import { DetailScreen } from "./screen/DetailScreen";
+import SearchResult from "./screen/SearchResult";
 
 const router = createBrowserRouter(
 	[
@@ -52,11 +53,17 @@ const router = createBrowserRouter(
 				},
 				{
 					path: "likedcontents",
-					element: <LikedContents />,
+					element: <EtcPages />,
 				},
 				{
 					path: "search",
 					element: <Search />,
+					children: [
+						{
+							path: ":keyword",
+							element: <SearchResult />,
+						},
+					],
 				},
 			],
 		},
