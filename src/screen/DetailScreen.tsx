@@ -92,7 +92,9 @@ export function DetailScreen() {
 		genreLength = tvDetail.genres.length - 1;
 		voteAverage = tvDetail?.vote_average.toFixed(1);
 		firstAirDate = tvDetail.first_air_date.slice(0, 4);
-		backDropPath = tvDetail.backdrop_path;
+		backDropPath = tvDetail.backdrop_path
+			? tvDetail.backdrop_path
+			: tvDetail.poster_path;
 	} else if (
 		!movieDetailisLoading &&
 		movieDetail &&
@@ -119,7 +121,9 @@ export function DetailScreen() {
 		genreLength = movieDetail.genres.length - 1;
 		voteAverage = movieDetail?.vote_average.toFixed(1);
 		firstAirDate = movieDetail.release_date.slice(0, 4);
-		backDropPath = movieDetail.backdrop_path;
+		backDropPath = movieDetail.backdrop_path
+			? movieDetail.backdrop_path
+			: movieDetail.poster_path;
 	}
 	return (
 		<>

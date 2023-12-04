@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { SearchKeywordState } from "../style/SearchStyles";
 import { useQuery } from "react-query";
-import { getSearchMovie } from "../API";
+import { getSearchMovie, getSearchTv } from "../API";
 import { Loading, MainWrapper } from "./../style/HomeStyles";
 import { useEffect } from "react";
 import { Title } from "../componenets/style/PopularTop20Styles";
@@ -21,19 +21,19 @@ export default function SearchResult() {
 		data: searchMovie2,
 		isLoading: searchMovieisLoading2,
 		refetch: searchMovierefetch2,
-	} = useQuery(["searchResultMovie", 1], () =>
+	} = useQuery(["searchResultMovie", 2], () =>
 		getSearchMovie(searchKeyword, 2)
 	);
 	const {
 		data: searchTv,
 		isLoading: searchTvisLoading,
 		refetch: searchTvrefetch,
-	} = useQuery(["searchResultTv", 1], () => getSearchMovie(searchKeyword, 1));
+	} = useQuery(["searchResultTv", 1], () => getSearchTv(searchKeyword, 1));
 	const {
 		data: searchTv2,
 		isLoading: searchTvisLoading2,
 		refetch: searchTvrefetch2,
-	} = useQuery(["searchResultTv", 2], () => getSearchMovie(searchKeyword, 2));
+	} = useQuery(["searchResultTv", 2], () => getSearchTv(searchKeyword, 2));
 
 	useEffect(() => {
 		searchMovierefetch();
@@ -43,11 +43,10 @@ export default function SearchResult() {
 	}, [searchKeyword]);
 
 	const noResult =
-		searchMovie?.total_results +
-		searchMovie2?.total_results +
-		searchTv?.total_results +
-		searchTv2?.total_results;
-	console.log(searchTv);
+		searchMovie?.results.length +
+		searchMovie2?.results.length +
+		searchTv?.results.length +
+		searchTv2?.results.length;
 	return (
 		<>
 			<SearchResultConatiner>
@@ -58,54 +57,70 @@ export default function SearchResult() {
 					<Loading>Searching...</Loading>
 				) : (
 					<>
-						{searchMovie.total_results !== 0 ? (
+						{noResult ? (
 							<>
-								<Title>"{searchKeyword}" search result</Title>
-								<MainWrapper>
-									<Slider
-										data={searchMovie}
-										title="영화 검색 결과"
-										category="movie"
-									></Slider>
-								</MainWrapper>
+								{searchMovie.results.length !== 0 ? (
+									<>
+										<Title>
+											"{searchKeyword}" search result
+										</Title>
+										<MainWrapper>
+											<Slider
+												data={searchMovie}
+												title="영화 검색 결과"
+												category="movie"
+											></Slider>
+										</MainWrapper>
+									</>
+								) : null}
+								{searchMovie2.results.length !== 0 ? (
+									<>
+										<Title>
+											"{searchKeyword}" search result
+										</Title>
+										<MainWrapper>
+											<Slider
+												data={searchMovie2}
+												title="영화 검색 결과"
+												category="movie"
+											></Slider>
+										</MainWrapper>
+									</>
+								) : null}
+								{searchTv.results.length !== 0 ? (
+									<>
+										<Title>
+											"{searchKeyword}" search result
+										</Title>
+										<MainWrapper>
+											<Slider
+												data={searchTv}
+												title="TV 프로그램 검색 결과"
+												category="tv"
+											></Slider>
+										</MainWrapper>
+									</>
+								) : null}
+								{searchTv2.results.length !== 0 ? (
+									<>
+										<Title>
+											"{searchKeyword}" search result
+										</Title>
+										<MainWrapper>
+											<Slider
+												data={searchTv2}
+												title="TV 프로그램 검색 결과"
+												category="tv"
+											></Slider>
+										</MainWrapper>
+									</>
+								) : null}
 							</>
-						) : null}
-						{searchMovie2.total_results !== 0 ? (
-							<>
-								<Title>"{searchKeyword}" search result</Title>
-								<MainWrapper>
-									<Slider
-										data={searchMovie2}
-										title="영화 검색 결과"
-										category="movie"
-									></Slider>
-								</MainWrapper>
-							</>
-						) : null}
-						{searchTv.total_results !== 0 ? (
-							<>
-								<Title>"{searchKeyword}" search result</Title>
-								<MainWrapper>
-									<Slider
-										data={searchTv}
-										title="TV 프로그램 검색 결과"
-										category="tv"
-									></Slider>
-								</MainWrapper>
-							</>
-						) : null}
-						{searchTv2.total_results !== 0 ? (
-							<>
-								<Title>"{searchKeyword}" search result</Title>
-								<MainWrapper>
-									<Slider
-										data={searchTv2}
-										title="TV 프로그램 검색 결과"
-										category="tv"
-									></Slider>
-								</MainWrapper>
-							</>
-						) : null}
+						) : (
+							<div style={{ height: "100vh" }}>
+								<Title>{searchKeyword} has no result...</Title>
+							</div>
+						)}
 					</>
 				)}
 			</SearchResultConatiner>

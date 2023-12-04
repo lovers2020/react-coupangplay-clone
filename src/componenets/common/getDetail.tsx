@@ -8,7 +8,6 @@ import { useEffect } from "react";
 
 export default function GetDetail({ id, category }: any) {
 	const location = useLocation().pathname.slice(0);
-
 	const {
 		data: tvDetail,
 		isLoading: tvDetailisLoading,
@@ -19,17 +18,15 @@ export default function GetDetail({ id, category }: any) {
 		isLoading: movieDetailisLoading,
 		refetch: movieDetailrefetch,
 	} = useQuery<IDetails>(["movieDetail", id], () => getMovieDetail(id));
-	console.log(id);
-	console.log(tvDetail);
+
 	let genres: string | undefined = "";
 	let voteAverage: string | undefined = "";
 	let releaseDate: string | undefined = "";
 	let name: string | undefined = "";
+
 	function getDetails() {
 		if (category === "tv" && !tvDetailisLoading) {
-			name = tvDetail?.name
-				? tvDetail?.name.slice(0, 14)
-				: tvDetail?.title.slice(0, 14);
+			name = tvDetail?.name.slice(0, 14);
 			voteAverage = tvDetail?.vote_average.toFixed(1);
 			genres = tvDetail?.genres.length ? tvDetail.genres[0].name : "";
 			releaseDate = tvDetail?.first_air_date.slice(0, 4);
@@ -43,10 +40,6 @@ export default function GetDetail({ id, category }: any) {
 		}
 	}
 	getDetails();
-	useEffect(() => {
-		tvDetailrefetch();
-		movieDetailrefetch();
-	}, [id]);
 
 	return (
 		<>
