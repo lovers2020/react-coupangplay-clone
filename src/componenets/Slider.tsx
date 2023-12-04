@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import { NextBtn, PrevBtn } from "./style/SliderStyles";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
-import { CreateImagePath } from "../utils/utils";
+import { CreateImagePath, NOT_FOUND_URL } from "../utils/utils";
 import GetDetail from "./common/getDetail";
 import { Link } from "react-router-dom";
 
@@ -63,15 +63,22 @@ export default function Slider({ data, title, category }: any) {
 								.slice(index * offset, index * offset + offset)
 								.map((current: any) => (
 									<>
-										<Link to={category + current.id}>
+										<Link to={"/" + category + current.id}>
 											<SliderBox
 												key={category + current.id}
-												bgphoto={CreateImagePath(
-													current.backdrop_path
-														? current.backdrop_path
-														: current.poster_path,
-													"w500"
-												)}
+												bgphoto={
+													current.backdrop_path !=
+													null
+														? CreateImagePath(
+																current.backdrop_path
+														  )
+														: current.poster_path !=
+														  null
+														? CreateImagePath(
+																current.poster_path
+														  )
+														: NOT_FOUND_URL
+												}
 											>
 												<GetDetail
 													id={current.id}

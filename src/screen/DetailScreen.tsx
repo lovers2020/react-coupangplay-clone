@@ -40,9 +40,11 @@ interface ITvLogo {
 export function DetailScreen() {
 	window.scrollTo(0, 0);
 	const location = useLocation().pathname.slice(1, 3);
+
 	let id = useLocation().pathname;
-	if (location === "mo") id = id.slice(14);
+	if (location === "mo") id = id.slice(6);
 	else id = id.slice(3);
+	console.log(location, id);
 
 	const { data: tvDetail, isLoading: tvDetailisLoading } = useQuery<IDetails>(
 		["tvDetailScreen", id],
@@ -118,6 +120,7 @@ export function DetailScreen() {
 		firstAirDate = movieDetail.release_date.slice(0, 4);
 		backDropPath = movieDetail.backdrop_path;
 	}
+	console.log(genres);
 	return (
 		<>
 			{!tvDetail && tvLogoisLoading && movieLogoisLoading ? null : (
@@ -145,8 +148,10 @@ export function DetailScreen() {
 								<span>{voteAverage}</span>•
 								{
 									<span>
-										{genres ? genres[0].name : "드라마"} •{" "}
-										{runtime ? runtime : "40"}분 •{" "}
+										{genres.length !== 0
+											? genres[0].name
+											: "드라마"}{" "}
+										• {runtime ? runtime : "40"}분 •{" "}
 										{firstAirDate}
 									</span>
 								}

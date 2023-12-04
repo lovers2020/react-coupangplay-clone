@@ -41,13 +41,13 @@ export function Banner({ data }: any) {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(1);
-		setIndex((prev) => (prev === pageLength ? (prev = 0) : prev + 1));
+		setIndex((prev) => (prev === pageLength ? 0 : prev + 1));
 	}
 	function DecreaseIndex() {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(-1);
-		setIndex((prev) => (prev === 0 ? (prev = pageLength) : prev - 1));
+		setIndex((prev) => (prev === 0 ? pageLength : prev - 1));
 	}
 	function toggleLeaving() {
 		setLeaving((prev) => !prev);
