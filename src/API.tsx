@@ -105,3 +105,9 @@ export function getSearchMovie(id: string, page: number) {
 		options
 	).then((response) => response.json());
 }
+export function getSearchTv(id: string, page: number) {
+	return fetch(
+		`https://api.themoviedb.org/3/search/tv?query=${id}&include_adult=false&language=en-US&page=${page}`,
+		options
+	).then((response) => response.json());
+}

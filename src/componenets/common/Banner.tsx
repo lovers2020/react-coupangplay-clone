@@ -23,7 +23,7 @@ import { Detail } from "../style/DetailStyles";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export function Banner({ data }: any) {
+export function Banner({ data, category }: any) {
 	const location = useLocation().pathname.slice(0);
 	const path = location === "/" ? "tv" : "movies";
 	const pageLength = 11;
@@ -130,7 +130,11 @@ export function Banner({ data }: any) {
 													}
 												</Detail>
 												<Link
-													to={path + `${current.id}`}
+													to={
+														"/" +
+														category +
+														current.id
+													}
 												>
 													<PlayBtn>
 														<svg

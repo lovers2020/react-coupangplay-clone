@@ -31,7 +31,7 @@ export default function Home() {
 				<Loading>Loading...</Loading>
 			) : (
 				<>
-					<Banner data={tvTopRated}></Banner>
+					<Banner data={tvTopRated} category="tv"></Banner>
 					<Category key="category"></Category>
 					<MainWrapper>
 						<PopularTop20

@@ -4,29 +4,36 @@ import { IDetails } from "../../utils/Interface";
 import { getMovieDetail, getTvDetail } from "../../API";
 import { Detail, DetailInfo } from "../style/DetailStyles";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
-export default function GetDetail({ id }: any) {
+export default function GetDetail({ id, category }: any) {
 	const location = useLocation().pathname.slice(0);
 
-	const { data: tvDetail, isLoading: tvDetailisLoading } = useQuery<IDetails>(
-		["tvDetail", id],
-		() => getTvDetail(id)
-	);
-	const { data: movieDetail, isLoading: movieDetailisLoading } =
-		useQuery<IDetails>(["movieDetail", id], () => getMovieDetail(id));
-
+	const {
+		data: tvDetail,
+		isLoading: tvDetailisLoading,
+		refetch: tvDetailrefetch,
+	} = useQuery<IDetails>(["tvDetail", id], () => getTvDetail(id));
+	const {
+		data: movieDetail,
+		isLoading: movieDetailisLoading,
+		refetch: movieDetailrefetch,
+	} = useQuery<IDetails>(["movieDetail", id], () => getMovieDetail(id));
+	console.log(id);
+	console.log(tvDetail);
 	let genres: string | undefined = "";
 	let voteAverage: string | undefined = "";
 	let releaseDate: string | undefined = "";
 	let name: string | undefined = "";
-
 	function getDetails() {
-		if (location === "/" && !tvDetailisLoading) {
-			name = tvDetail?.name.slice(0, 14);
+		if (category === "tv" && !tvDetailisLoading) {
+			name = tvDetail?.name
+				? tvDetail?.name.slice(0, 14)
+				: tvDetail?.title.slice(0, 14);
 			voteAverage = tvDetail?.vote_average.toFixed(1);
 			genres = tvDetail?.genres.length ? tvDetail.genres[0].name : "";
 			releaseDate = tvDetail?.first_air_date.slice(0, 4);
-		} else if (location === "/movies" && !movieDetailisLoading) {
+		} else if (category === "movie" && !movieDetailisLoading) {
 			name = movieDetail?.title.slice(0, 14);
 			voteAverage = movieDetail?.vote_average.toFixed(1);
 			genres = movieDetail?.genres.length
@@ -36,6 +43,10 @@ export default function GetDetail({ id }: any) {
 		}
 	}
 	getDetails();
+	useEffect(() => {
+		tvDetailrefetch();
+		movieDetailrefetch();
+	}, [id]);
 
 	return (
 		<>

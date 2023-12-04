@@ -82,6 +82,7 @@ export default function Slider({ data, title, category }: any) {
 											>
 												<GetDetail
 													id={current.id}
+													category={category}
 												></GetDetail>
 											</SliderBox>
 										</Link>

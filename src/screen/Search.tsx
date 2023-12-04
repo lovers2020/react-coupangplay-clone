@@ -22,7 +22,7 @@ export default function SearchBox() {
 
 		setSearchKeyword(search_keyword);
 		setValue("input", "");
-		navigate(search_keyword);
+		navigate("result/" + search_keyword);
 	}
 
 	return (
@@ -31,7 +31,7 @@ export default function SearchBox() {
 				<Form onSubmit={handleSubmit(handleFormSubmit)}>
 					<Input
 						{...register("input", { required: true })}
-						placeholder="제목, 장르, 배우로 검색해보세요."
+						placeholder="영화 제목, TV 프로그램, 장르로 검색해보세요."
 					></Input>
 					<SearchLogo onClick={searchIconClick} src={SEARCH_URL} />
 				</Form>

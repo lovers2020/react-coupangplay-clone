@@ -31,27 +31,27 @@ export default function Movie() {
 				<Loading>Loading...</Loading>
 			) : (
 				<>
-					<Banner data={movieTop}></Banner>
+					<Banner data={movieTop} category="movie"></Banner>
 					<Category key="category"></Category>
 					<MainWrapper>
 						<PopularTop20
 							data={movieTop}
-							category="movies"
+							category="movie"
 						></PopularTop20>
 						<Slider
 							data={movieNow}
 							title="현재 상영중인 영화"
-							category="movies"
+							category="movie"
 						></Slider>
 						<Slider
 							data={moviePop}
 							title="인기있는 영화"
-							category="movies"
+							category="movie"
 						></Slider>
 						<Slider
 							data={movieUpcoming}
 							title="다가오는 영화"
-							category="movies"
+							category="movie"
 						></Slider>
 					</MainWrapper>
 				</>
