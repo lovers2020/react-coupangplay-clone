@@ -8,6 +8,11 @@ import { Loading, MainWrapper } from "../style/HomeStyles";
 import Slider from "../componenets/Slider";
 
 export default function LikedContents() {
+	let tvData = [];
+	let movieData = [];
+	let tvIsLoading = true;
+	let movieIsLoading = true;
+
 	const tvLiked = useRecoilValue(tvLikedId);
 	const movieLiked = useRecoilValue(movieLikedId);
 
@@ -25,15 +30,21 @@ export default function LikedContents() {
 			suspense: true,
 		}))
 	);
+	console.log(tvDetail, movieDetail);
 	const tvLength = tvDetail.length === 0;
 	const movieLength = movieDetail.length === 0;
-	let tvData = [];
-	let movieData = [];
+
+	console.log(tvLength, movieLength);
 	if (!tvLength) {
 		tvData = tvDetail.map((current) => current.data);
+		tvIsLoading = tvDetail.some((current) => current.isLoading);
 	}
-
-	console.log(tvData);
+	if (!movieLength) {
+		movieData = movieDetail.map((current) => current.data);
+		movieIsLoading = movieDetail.some((current) => current.isLoading);
+	}
+	console.log(tvIsLoading, movieIsLoading);
+	console.log(tvData, movieData);
 
 	return (
 		<>
@@ -42,14 +53,24 @@ export default function LikedContents() {
 					<Title>찜한 콘텐츠가 없습니다.</Title>
 				) : (
 					<>
-						{!tvLength ? (
+						{tvData && !tvIsLoading ? (
 							<>
-								<Title>찜한 TV 콘텐츠</Title>
 								<MainWrapper>
 									<Slider
 										data={tvData}
-										title="TV 프로그램 검색 결과"
+										title="찜한 TV 콘텐츠"
 										category="tv"
+									></Slider>
+								</MainWrapper>
+							</>
+						) : null}
+						{movieData && !movieIsLoading ? (
+							<>
+								<MainWrapper>
+									<Slider
+										data={movieData}
+										title="찜한 영화 콘텐츠"
+										category="movie"
 									></Slider>
 								</MainWrapper>
 							</>

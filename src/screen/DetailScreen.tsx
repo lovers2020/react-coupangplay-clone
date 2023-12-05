@@ -152,8 +152,6 @@ export function DetailScreen() {
 			? movieLiked.includes(id)
 			: tvLiked.includes(id);
 	}
-	console.log(movieLiked);
-	console.log(tvLiked);
 	return (
 		<>
 			{tvLogoisLoading &&
