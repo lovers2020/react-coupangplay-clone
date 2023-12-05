@@ -26,11 +26,11 @@ export const SliderWrapper = styled(motion.div)`
 		transition: scale 0.3s linear;
 		z-index: 3;
 		scale: 1.3;
-		&:first-child {
-			transform-origin: left bottom;
-		}
 		&:last-child {
 			transform-origin: right bottom;
+		}
+		&:first-child {
+			transform-origin: left bottom;
 		}
 	}
 `;
