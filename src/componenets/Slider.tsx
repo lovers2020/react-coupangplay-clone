@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 const offset = 6;
 
 export default function Slider({ data, title, category }: any) {
-	console.log(data);
 	const [dir, setDir] = useState(1);
 	const [index, setIndex] = useState(0);
 	const [leaving, setLeaving] = useState(false);
@@ -25,13 +24,13 @@ export default function Slider({ data, title, category }: any) {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(1);
-		setIndex((prev) => (prev === 2 ? (prev = 0) : prev + 1));
+		setIndex((prev) => (prev === 2 ? 0 : prev + 1));
 	}
 	function DecreaseIndex() {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(-1);
-		setIndex((prev) => (prev === 0 ? (prev = 2) : prev - 1));
+		setIndex((prev) => (prev === 0 ? 2 : prev - 1));
 	}
 	function toggleLeaving() {
 		setLeaving((prev) => !prev);

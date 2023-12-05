@@ -12,6 +12,7 @@ export const SliderWrapper = styled(motion.div)`
 	width: 95%;
 	top: 50px;
 	left: 2.5%;
+	gap: 10px;
 	height: 180px;
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
@@ -51,8 +52,12 @@ export const NextBtn = styled.button`
 	background-color: transparent;
 	border: none;
 	font-size: 48px;
-	color: white;
+	color: transparent;
 	cursor: pointer;
+	&:hover {
+		transition: color 0.4s;
+		color: white;
+	}
 `;
 export const PrevBtn = styled.button`
 	height: 100%;
@@ -63,8 +68,12 @@ export const PrevBtn = styled.button`
 	background-color: transparent;
 	border: none;
 	font-size: 48px;
-	color: white;
+	color: black;
 	cursor: pointer;
+	&:hover {
+		transition: color 0.4s;
+		color: white;
+	}
 `;
 export const rowVaritants = {
 	hidden: (dir: number) => ({

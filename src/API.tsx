@@ -20,7 +20,7 @@ export function getTvPopular() {
 }
 export function getTvAiringToday() {
 	return fetch(
-		"https://api.themoviedb.org/3/tv/airing_today?language=ko-KR&page=1",
+		"https://api.themoviedb.org/3/tv/airing_today?language=ko-KR&page=2",
 		options
 	).then((response) => response.json());
 }

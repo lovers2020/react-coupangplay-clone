@@ -34,7 +34,6 @@ import {
 } from "../utils/utils";
 import { Loading } from "../style/HomeStyles";
 import { useRecoilState } from "recoil";
-import { useState } from "react";
 
 interface ITvLogo {
 	logos: [

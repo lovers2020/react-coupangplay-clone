@@ -1,10 +1,10 @@
 import { useRecoilValue } from "recoil";
-import { LOADING_IMG, movieLikedId, tvLikedId } from "../utils/utils";
+import { movieLikedId, tvLikedId } from "../utils/utils";
 import { useQueries } from "react-query";
 import { getMovieDetail, getTvDetail } from "../API";
 import { SearchResultConatiner } from "../style/SearchResultStyles";
 import { Title } from "../componenets/style/PopularTop20Styles";
-import { Loading, MainWrapper } from "../style/HomeStyles";
+import { MainWrapper } from "../style/HomeStyles";
 import Slider from "../componenets/Slider";
 
 export default function LikedContents() {
@@ -30,7 +30,6 @@ export default function LikedContents() {
 			suspense: true,
 		}))
 	);
-	console.log(tvDetail, movieDetail);
 	const tvLength = tvDetail.length === 0;
 	const movieLength = movieDetail.length === 0;
 
@@ -43,8 +42,6 @@ export default function LikedContents() {
 		movieData = movieDetail.map((current) => current.data);
 		movieIsLoading = movieDetail.some((current) => current.isLoading);
 	}
-	console.log(tvIsLoading, movieIsLoading);
-	console.log(tvData, movieData);
 
 	return (
 		<>
