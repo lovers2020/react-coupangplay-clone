@@ -50,10 +50,12 @@ export default function LikedContents() {
 		<>
 			<SearchResultConatiner>
 				{tvLength && movieLength ? (
-					<Title>찜한 콘텐츠가 없습니다.</Title>
+					<div style={{ width: "100%", height: "50vh" }}>
+						<Title>찜한 콘텐츠가 없습니다.</Title>
+					</div>
 				) : (
 					<>
-						{tvData && !tvIsLoading ? (
+						{tvData && tvIsLoading ? null : (
 							<>
 								<MainWrapper>
 									<Slider
@@ -63,8 +65,8 @@ export default function LikedContents() {
 									></Slider>
 								</MainWrapper>
 							</>
-						) : null}
-						{movieData && !movieIsLoading ? (
+						)}
+						{movieData && movieIsLoading ? null : (
 							<>
 								<MainWrapper>
 									<Slider
@@ -74,7 +76,7 @@ export default function LikedContents() {
 									></Slider>
 								</MainWrapper>
 							</>
-						) : null}
+						)}
 					</>
 				)}
 			</SearchResultConatiner>
