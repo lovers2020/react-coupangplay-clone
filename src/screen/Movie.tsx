@@ -36,21 +36,21 @@ export default function Movie() {
 					<Category key="category"></Category>
 					<MainWrapper>
 						<PopularTop20
-							data={movieTop}
+							data={movieTop?.results}
 							category="movie"
 						></PopularTop20>
 						<Slider
-							data={movieNow}
+							data={movieNow?.results}
 							title="현재 상영중인 영화"
 							category="movie"
 						></Slider>
 						<Slider
-							data={moviePop}
+							data={moviePop?.results}
 							title="인기있는 영화"
 							category="movie"
 						></Slider>
 						<Slider
-							data={movieUpcoming}
+							data={movieUpcoming?.results}
 							title="다가오는 영화"
 							category="movie"
 						></Slider>

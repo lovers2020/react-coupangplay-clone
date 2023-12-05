@@ -84,7 +84,7 @@ export default function PopularTop20({ data, category }: any) {
 							exit="exit"
 							key={startIndex}
 						>
-							{data.results
+							{data
 								.slice(startIndex, endIndex)
 								.map((current: any, i: number) => (
 									<>

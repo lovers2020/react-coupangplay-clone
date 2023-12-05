@@ -36,21 +36,21 @@ export default function Home() {
 					<Category key="category"></Category>
 					<MainWrapper>
 						<PopularTop20
-							data={tvTopRated}
+							data={tvTopRated?.results}
 							category="tv"
 						></PopularTop20>
 						<Slider
-							data={tvAiring}
+							data={tvAiring?.results}
 							title="새로운 에피소드"
 							category="tv"
 						></Slider>
 						<Slider
-							data={tvPopular}
+							data={tvPopular?.results}
 							title="인기있는 드라마"
 							category="tv"
 						></Slider>
 						<Slider
-							data={tvOnTheAir}
+							data={tvOnTheAir?.results}
 							title="On The Air"
 							category="tv"
 						></Slider>

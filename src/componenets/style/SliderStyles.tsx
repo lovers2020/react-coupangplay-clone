@@ -11,7 +11,7 @@ export const SliderWrapper = styled(motion.div)`
 	position: absolute;
 	width: 95%;
 	top: 50px;
-	left: 50px;
+	left: 2.5%;
 	height: 180px;
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
@@ -45,7 +45,7 @@ export const SliderBox = styled.div<{ bgphoto: string }>`
 export const NextBtn = styled.button`
 	height: 100%;
 	position: absolute;
-	top: 0;
+	top: 5%;
 	right: 0;
 	z-index: 1;
 	background-color: transparent;
@@ -57,7 +57,7 @@ export const NextBtn = styled.button`
 export const PrevBtn = styled.button`
 	height: 100%;
 	position: absolute;
-	top: 0;
+	top: 5%;
 	left: 0;
 	z-index: 1;
 	background-color: transparent;

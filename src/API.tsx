@@ -30,7 +30,7 @@ export function getTvOnTheAir() {
 		options
 	).then((response) => response.json());
 }
-export function getTvDetail(id: number) {
+export function getTvDetail(id: number | string) {
 	return fetch(
 		`https://api.themoviedb.org/3/tv/${id}?language=ko-KR`,
 		options
@@ -73,7 +73,7 @@ export function getMovieTopRated() {
 		options
 	).then((response) => response.json());
 }
-export function getMovieDetail(id: number) {
+export function getMovieDetail(id: number | string) {
 	return fetch(
 		`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`,
 		options

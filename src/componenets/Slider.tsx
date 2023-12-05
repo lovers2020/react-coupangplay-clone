@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 const offset = 6;
 
 export default function Slider({ data, title, category }: any) {
+	console.log(data);
 	const [dir, setDir] = useState(1);
 	const [index, setIndex] = useState(0);
 	const [leaving, setLeaving] = useState(false);
@@ -61,7 +62,7 @@ export default function Slider({ data, title, category }: any) {
 							exit="exit"
 							key={index}
 						>
-							{data.results
+							{data
 								.slice(index * offset, index * offset + offset)
 								.map((current: any) => (
 									<>
