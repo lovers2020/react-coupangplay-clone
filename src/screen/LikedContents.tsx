@@ -1,24 +1,35 @@
 import { useRecoilValue } from "recoil";
 import { movieLikedId, tvLikedId } from "../utils/utils";
 import { useQueries } from "react-query";
-import { getTvDetail } from "../API";
+import { getMovieDetail, getTvDetail } from "../API";
+import { SearchResultConatiner } from "../style/SearchResultStyles";
 
 export default function LikedContents() {
 	const tvLiked = useRecoilValue(tvLikedId);
 	const movieLiked = useRecoilValue(movieLikedId);
+
 	const tvDetail = useQueries(
 		tvLiked.map((current) => ({
 			queryKey: ["tvLiked", current],
 			queryFn: () => getTvDetail(current),
+			suspense: true,
 		}))
 	);
-	console.log(tvDetail);
-	console.log(movieLiked);
-	console.log(tvLiked);
+	const movieDetail = useQueries(
+		movieLiked.map((current) => ({
+			queryKey: ["movieLiked", current],
+			queryFn: () => getMovieDetail(current),
+			suspense: true,
+		}))
+	);
+	console.log(tvDetail[0].isLoading);
 
 	return (
 		<>
-			<div>asdasdasdasdasd</div>
+			<SearchResultConatiner>
+				{/* {tvDetail[0].isLoading && movieDetail[0].isLoading : } */}
+				<div>asdasdasdasdasd</div>
+			</SearchResultConatiner>
 		</>
 	);
 }

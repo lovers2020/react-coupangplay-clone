@@ -66,7 +66,7 @@ export default function SearchResult() {
 										</Title>
 										<MainWrapper>
 											<Slider
-												data={searchMovie}
+												data={searchMovie.results}
 												title="영화 검색 결과"
 												category="movie"
 											></Slider>
@@ -80,7 +80,7 @@ export default function SearchResult() {
 										</Title>
 										<MainWrapper>
 											<Slider
-												data={searchMovie2}
+												data={searchMovie2.results}
 												title="영화 검색 결과"
 												category="movie"
 											></Slider>
@@ -94,7 +94,7 @@ export default function SearchResult() {
 										</Title>
 										<MainWrapper>
 											<Slider
-												data={searchTv}
+												data={searchTv.results}
 												title="TV 프로그램 검색 결과"
 												category="tv"
 											></Slider>
@@ -108,7 +108,7 @@ export default function SearchResult() {
 										</Title>
 										<MainWrapper>
 											<Slider
-												data={searchTv2}
+												data={searchTv2.results}
 												title="TV 프로그램 검색 결과"
 												category="tv"
 											></Slider>
@@ -117,9 +117,7 @@ export default function SearchResult() {
 								) : null}
 							</>
 						) : (
-							<div style={{ height: "100vh" }}>
-								<Title>{searchKeyword} has no result...</Title>
-							</div>
+							<Title>{searchKeyword} has no result...</Title>
 						)}
 					</>
 				)}
