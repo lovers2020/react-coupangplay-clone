@@ -1,5 +1,4 @@
 import { useRecoilValue } from "recoil";
-import { SearchKeywordState } from "../style/SearchStyles";
 import { useQuery } from "react-query";
 import { getSearchMovie, getSearchTv } from "../API";
 import { Loading, MainWrapper } from "./../style/HomeStyles";
@@ -7,6 +6,7 @@ import { useEffect } from "react";
 import { Title } from "../componenets/style/PopularTop20Styles";
 import Slider from "../componenets/Slider";
 import { SearchResultConatiner } from "../style/SearchResultStyles";
+import { LOADING_IMG, SearchKeywordState } from "../utils/utils";
 
 export default function SearchResult() {
 	const searchKeyword = useRecoilValue(SearchKeywordState);
@@ -54,7 +54,7 @@ export default function SearchResult() {
 				searchMovieisLoading2 ||
 				searchTvisLoading ||
 				searchTvisLoading2 ? (
-					<Loading>Searching...</Loading>
+					<Loading bgphoto={LOADING_IMG}>Searching...</Loading>
 				) : (
 					<>
 						{noResult ? (

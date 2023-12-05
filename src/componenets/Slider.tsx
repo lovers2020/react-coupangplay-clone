@@ -38,7 +38,9 @@ export default function Slider({ data, title, category }: any) {
 
 	return (
 		<>
-			{!data ? null : (
+			{!data ? (
+				<div>Loading</div>
+			) : (
 				<SliderContainer>
 					<Title>{title}</Title>
 

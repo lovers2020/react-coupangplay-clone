@@ -25,7 +25,16 @@ import {
 	PlayBtn,
 } from "../componenets/style/BannerStyles";
 import { Detail } from "../componenets/style/DetailStyles";
-import { CreateImagePath, NOT_FOUND_URL } from "../utils/utils";
+import {
+	CreateImagePath,
+	LOADING_IMG,
+	NOT_FOUND_URL,
+	movieLikedId,
+	tvLikedId,
+} from "../utils/utils";
+import { Loading } from "../style/HomeStyles";
+import { useRecoilState } from "recoil";
+import { useState } from "react";
 
 interface ITvLogo {
 	logos: [
@@ -38,6 +47,9 @@ interface ITvLogo {
 
 export function DetailScreen() {
 	window.scrollTo(0, 0);
+	const [tvLiked, setTvLiked] = useRecoilState(tvLikedId);
+	const [movieLiked, setMovieLiked] = useRecoilState(movieLikedId);
+
 	const location = useLocation().pathname.slice(1, 3);
 	let id = useLocation().pathname;
 
@@ -125,9 +137,31 @@ export function DetailScreen() {
 			? movieDetail.backdrop_path
 			: movieDetail.poster_path;
 	}
+	function clickLiked() {
+		if (location === "mo" && !movieLiked.includes(id))
+			setMovieLiked((prev) => [...prev, id]);
+		else if (location === "mo" && movieLiked.includes(id))
+			setMovieLiked((prev) => prev.filter((element) => element !== id));
+		if (location === "tv" && !tvLiked.includes(id))
+			setTvLiked((prev) => [...prev, id]);
+		else if (location === "tv" && tvLiked.includes(id))
+			setTvLiked((prev) => prev.filter((element) => element !== id));
+	}
+	function liked() {
+		return location === "mo"
+			? movieLiked.includes(id)
+			: tvLiked.includes(id);
+	}
+	console.log(movieLiked);
+	console.log(tvLiked);
 	return (
 		<>
-			{!tvDetail && tvLogoisLoading && movieLogoisLoading ? null : (
+			{tvLogoisLoading &&
+			movieLogoisLoading &&
+			tvDetailisLoading &&
+			movieDetailisLoading ? (
+				<Loading bgphoto={LOADING_IMG}></Loading>
+			) : (
 				<DetailContainer>
 					<MainBg>
 						<MainBgDetail>
@@ -171,8 +205,8 @@ export function DetailScreen() {
 									<span>재생하기</span>
 								</PlayBtn>
 								<AddLikeWrapper>
-									<AddLike>
-										<span>+</span>
+									<AddLike onClick={clickLiked}>
+										<span>{liked() ? "√" : "+"}</span>
 									</AddLike>
 									<p>찜한 컨텐츠</p>
 								</AddLikeWrapper>

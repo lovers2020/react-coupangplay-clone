@@ -1,7 +1,7 @@
 import { MdNavigateBefore } from "react-icons/md";
 import { MdNavigateNext } from "react-icons/md";
 import { AnimatePresence } from "framer-motion";
-import { CreateImagePath } from "../../utils/utils";
+import { CreateImagePath, LOADING_IMG } from "../../utils/utils";
 import {
 	MainBg,
 	MainBgDetail,
@@ -25,7 +25,6 @@ import { Link } from "react-router-dom";
 
 export function Banner({ data, category }: any) {
 	const location = useLocation().pathname.slice(0);
-	const path = location === "/" ? "tv" : "movies";
 	const pageLength = 11;
 	const [dir, setDir] = useState(1);
 	const [index, setIndex] = useState(0);
@@ -75,7 +74,7 @@ export function Banner({ data, category }: any) {
 	return (
 		<>
 			{tvDetailInBannerisLoading || movieDetailisLoading ? (
-				<Loading>Loading..</Loading>
+				<Loading bgphoto={LOADING_IMG}>Loading..</Loading>
 			) : (
 				<Slider>
 					<NextBtn onClick={IncreaseIndex}>

@@ -3,21 +3,14 @@ import { BoxDetail } from "../style/PopularTop20Styles";
 import { IDetails } from "../../utils/Interface";
 import { getMovieDetail, getTvDetail } from "../../API";
 import { Detail, DetailInfo } from "../style/DetailStyles";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 export default function GetDetail({ id, category }: any) {
-	const location = useLocation().pathname.slice(0);
-	const {
-		data: tvDetail,
-		isLoading: tvDetailisLoading,
-		refetch: tvDetailrefetch,
-	} = useQuery<IDetails>(["tvDetail", id], () => getTvDetail(id));
-	const {
-		data: movieDetail,
-		isLoading: movieDetailisLoading,
-		refetch: movieDetailrefetch,
-	} = useQuery<IDetails>(["movieDetail", id], () => getMovieDetail(id));
+	const { data: tvDetail, isLoading: tvDetailisLoading } = useQuery<IDetails>(
+		["tvDetail", id],
+		() => getTvDetail(id)
+	);
+	const { data: movieDetail, isLoading: movieDetailisLoading } =
+		useQuery<IDetails>(["movieDetail", id], () => getMovieDetail(id));
 
 	let genres: string | undefined = "";
 	let voteAverage: string | undefined = "";

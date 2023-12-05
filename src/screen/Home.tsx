@@ -11,6 +11,7 @@ import Category from "../componenets/Category";
 import PopularTop20 from "../componenets/PopularTop20";
 import { ICommonInfo } from "../utils/Interface";
 import Slider from "../componenets/Slider";
+import { LOADING_IMG } from "../utils/utils";
 
 export default function Home() {
 	const { data: tvTopRated, isLoading: tvTopRatedisLoading } =
@@ -28,7 +29,7 @@ export default function Home() {
 			tvPopularisLoading ||
 			tvAiringisLoading ||
 			tvOnTheAirisLoading ? (
-				<Loading>Loading...</Loading>
+				<Loading bgphoto={LOADING_IMG}></Loading>
 			) : (
 				<>
 					<Banner data={tvTopRated} category="tv"></Banner>

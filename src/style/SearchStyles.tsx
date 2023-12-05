@@ -1,12 +1,4 @@
 import styled from "styled-components";
-import { atom } from "recoil";
-export const SearchKeywordState = atom<string>({
-	key: "searchKeyword",
-	default: "",
-});
-export const SEARCH_URL =
-	"https://assets.coupangplay.com/images/svg/search.svg";
-
 export const SearchLogo = styled.img`
 	scale: 1.5;
 	margin-right: 30px;

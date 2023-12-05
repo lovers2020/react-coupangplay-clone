@@ -11,6 +11,7 @@ import { Banner } from "../componenets/common/Banner";
 import Category from "../componenets/Category";
 import PopularTop20 from "./../componenets/PopularTop20";
 import Slider from "../componenets/Slider";
+import { LOADING_IMG } from "../utils/utils";
 
 export default function Movie() {
 	const { data: movieTop, isLoading: movieTopisLoading } =
@@ -28,7 +29,7 @@ export default function Movie() {
 			moviePopisLoading ||
 			movieUpcomingisLoading ||
 			movieNowisLoading ? (
-				<Loading>Loading...</Loading>
+				<Loading bgphoto={LOADING_IMG}></Loading>
 			) : (
 				<>
 					<Banner data={movieTop} category="movie"></Banner>

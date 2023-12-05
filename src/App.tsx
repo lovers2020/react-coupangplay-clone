@@ -53,7 +53,7 @@ const router = createBrowserRouter(
 				},
 				{
 					path: "likedcontents",
-					element: <EtcPages />,
+					element: <LikedContents />,
 				},
 				{
 					path: "search",

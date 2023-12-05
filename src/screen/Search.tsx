@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
-import { Form, Input, SearchBoxContainer } from "../style/SearchStyles";
+import {
+	Form,
+	Input,
+	SearchBoxContainer,
+	SearchLogo,
+} from "../style/SearchStyles";
 import { useSetRecoilState } from "recoil";
 import { Outlet, useNavigate } from "react-router-dom";
-import {
-	SEARCH_URL,
-	SearchLogo,
-	SearchKeywordState,
-} from "../style/SearchStyles";
+import { SEARCH_URL, SearchKeywordState } from "../utils/utils";
 
 export default function SearchBox() {
 	const navigate = useNavigate();
