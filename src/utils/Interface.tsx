@@ -26,13 +26,15 @@ export interface IDetails {
 	runtime: number;
 }
 export interface ICommonInfo {
-	backdrop_path: string;
-	poster_path: string;
-	title: string;
-	name: string;
-	overview: string;
-	release_date: string;
-	id: number;
-	vote_average: number;
-	genre_ids: number[];
+	results: [
+		backdrop_path: string,
+		poster_path: string,
+		title: string,
+		name: string,
+		overview: string,
+		release_date: string,
+		id: number,
+		vote_average: number,
+		genre_ids: number[]
+	];
 }

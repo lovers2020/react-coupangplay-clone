@@ -84,11 +84,11 @@ export default function PopularTop20({ data, category }: any) {
 							exit="exit"
 							key={startIndex}
 						>
-							{data.results
+							{data
 								.slice(startIndex, endIndex)
 								.map((current: any, i: number) => (
 									<>
-										<Link to={category + current.id}>
+										<Link to={"/" + category + current.id}>
 											<PoularBoxImg
 												key={current.id}
 												bgphoto={CreateImagePath(
@@ -101,6 +101,7 @@ export default function PopularTop20({ data, category }: any) {
 												</RankNumber>
 												<GetDetail
 													id={current.id}
+													category={category}
 												></GetDetail>
 											</PoularBoxImg>
 										</Link>

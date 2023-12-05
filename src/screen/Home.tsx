@@ -11,6 +11,7 @@ import Category from "../componenets/Category";
 import PopularTop20 from "../componenets/PopularTop20";
 import { ICommonInfo } from "../utils/Interface";
 import Slider from "../componenets/Slider";
+import { LOADING_IMG } from "../utils/utils";
 
 export default function Home() {
 	const { data: tvTopRated, isLoading: tvTopRatedisLoading } =
@@ -28,28 +29,28 @@ export default function Home() {
 			tvPopularisLoading ||
 			tvAiringisLoading ||
 			tvOnTheAirisLoading ? (
-				<Loading>Loading...</Loading>
+				<Loading bgphoto={LOADING_IMG}></Loading>
 			) : (
 				<>
-					<Banner data={tvTopRated}></Banner>
+					<Banner data={tvTopRated} category="tv"></Banner>
 					<Category key="category"></Category>
 					<MainWrapper>
 						<PopularTop20
-							data={tvTopRated}
+							data={tvTopRated?.results}
 							category="tv"
 						></PopularTop20>
 						<Slider
-							data={tvAiring}
+							data={tvAiring?.results}
 							title="새로운 에피소드"
 							category="tv"
 						></Slider>
 						<Slider
-							data={tvPopular}
+							data={tvPopular?.results}
 							title="인기있는 드라마"
 							category="tv"
 						></Slider>
 						<Slider
-							data={tvOnTheAir}
+							data={tvOnTheAir?.results}
 							title="On The Air"
 							category="tv"
 						></Slider>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const SearchResultConatiner = styled.div`
+	margin-top: 100px;
 	width: 100%;
 	height: 100%;
 `;

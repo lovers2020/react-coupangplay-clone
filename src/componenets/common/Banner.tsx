@@ -1,7 +1,7 @@
 import { MdNavigateBefore } from "react-icons/md";
 import { MdNavigateNext } from "react-icons/md";
 import { AnimatePresence } from "framer-motion";
-import { CreateImagePath } from "../../utils/utils";
+import { CreateImagePath, LOADING_IMG } from "../../utils/utils";
 import {
 	MainBg,
 	MainBgDetail,
@@ -23,9 +23,8 @@ import { Detail } from "../style/DetailStyles";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export function Banner({ data }: any) {
+export function Banner({ data, category }: any) {
 	const location = useLocation().pathname.slice(0);
-	const path = location === "/" ? "tv" : "movies";
 	const pageLength = 11;
 	const [dir, setDir] = useState(1);
 	const [index, setIndex] = useState(0);
@@ -41,13 +40,13 @@ export function Banner({ data }: any) {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(1);
-		setIndex((prev) => (prev === pageLength ? (prev = 0) : prev + 1));
+		setIndex((prev) => (prev === pageLength ? 0 : prev + 1));
 	}
 	function DecreaseIndex() {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(-1);
-		setIndex((prev) => (prev === 0 ? (prev = pageLength) : prev - 1));
+		setIndex((prev) => (prev === 0 ? pageLength : prev - 1));
 	}
 	function toggleLeaving() {
 		setLeaving((prev) => !prev);
@@ -75,7 +74,7 @@ export function Banner({ data }: any) {
 	return (
 		<>
 			{tvDetailInBannerisLoading || movieDetailisLoading ? (
-				<Loading>Loading..</Loading>
+				<Loading bgphoto={LOADING_IMG}>Loading..</Loading>
 			) : (
 				<Slider>
 					<NextBtn onClick={IncreaseIndex}>
@@ -130,7 +129,11 @@ export function Banner({ data }: any) {
 													}
 												</Detail>
 												<Link
-													to={path + `${current.id}`}
+													to={
+														"/" +
+														category +
+														current.id
+													}
 												>
 													<PlayBtn>
 														<svg

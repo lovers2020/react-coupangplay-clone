@@ -3,11 +3,8 @@ import { BoxDetail } from "../style/PopularTop20Styles";
 import { IDetails } from "../../utils/Interface";
 import { getMovieDetail, getTvDetail } from "../../API";
 import { Detail, DetailInfo } from "../style/DetailStyles";
-import { useLocation } from "react-router-dom";
 
-export default function GetDetail({ id }: any) {
-	const location = useLocation().pathname.slice(0);
-
+export default function GetDetail({ id, category }: any) {
 	const { data: tvDetail, isLoading: tvDetailisLoading } = useQuery<IDetails>(
 		["tvDetail", id],
 		() => getTvDetail(id)
@@ -21,12 +18,12 @@ export default function GetDetail({ id }: any) {
 	let name: string | undefined = "";
 
 	function getDetails() {
-		if (location === "/" && !tvDetailisLoading) {
+		if (category === "tv" && !tvDetailisLoading) {
 			name = tvDetail?.name.slice(0, 14);
 			voteAverage = tvDetail?.vote_average.toFixed(1);
 			genres = tvDetail?.genres.length ? tvDetail.genres[0].name : "";
 			releaseDate = tvDetail?.first_air_date.slice(0, 4);
-		} else if (location === "/movies" && !movieDetailisLoading) {
+		} else if (category === "movie" && !movieDetailisLoading) {
 			name = movieDetail?.title.slice(0, 14);
 			voteAverage = movieDetail?.vote_average.toFixed(1);
 			genres = movieDetail?.genres.length

@@ -9,31 +9,19 @@ import {
 import { Loading, MainWrapper } from "../style/HomeStyles";
 import { Banner } from "../componenets/common/Banner";
 import Category from "../componenets/Category";
-import { useLocation } from "react-router-dom";
 import PopularTop20 from "./../componenets/PopularTop20";
 import Slider from "../componenets/Slider";
+import { LOADING_IMG } from "../utils/utils";
 
 export default function Movie() {
-	const {
-		data: movieTop,
-		isLoading: movieTopisLoading,
-		refetch: movieToprefetch,
-	} = useQuery<ICommonInfo>("movieTop", getMovieTopRated);
-	const {
-		data: moviePop,
-		isLoading: moviePopisLoading,
-		refetch: moviePoprefetch,
-	} = useQuery<ICommonInfo>("moviePop", getMoviePopular);
-	const {
-		data: movieUpcoming,
-		isLoading: movieUpcomingisLoading,
-		refetch: movieUprefetch,
-	} = useQuery<ICommonInfo>("movieUp", getMovieUpcoming);
-	const {
-		data: movieNow,
-		isLoading: movieNowisLoading,
-		refetch: movieNowrefetch,
-	} = useQuery<ICommonInfo>("movieNow", getMovieNow);
+	const { data: movieTop, isLoading: movieTopisLoading } =
+		useQuery<ICommonInfo>("movieTop", getMovieTopRated);
+	const { data: moviePop, isLoading: moviePopisLoading } =
+		useQuery<ICommonInfo>("moviePop", getMoviePopular);
+	const { data: movieUpcoming, isLoading: movieUpcomingisLoading } =
+		useQuery<ICommonInfo>("movieUp", getMovieUpcoming);
+	const { data: movieNow, isLoading: movieNowisLoading } =
+		useQuery<ICommonInfo>("movieNow", getMovieNow);
 
 	return (
 		<>
@@ -41,30 +29,30 @@ export default function Movie() {
 			moviePopisLoading ||
 			movieUpcomingisLoading ||
 			movieNowisLoading ? (
-				<Loading>Loading...</Loading>
+				<Loading bgphoto={LOADING_IMG}></Loading>
 			) : (
 				<>
-					<Banner data={movieTop}></Banner>
+					<Banner data={movieTop} category="movie"></Banner>
 					<Category key="category"></Category>
 					<MainWrapper>
 						<PopularTop20
-							data={movieTop}
-							category="movies"
+							data={movieTop?.results}
+							category="movie"
 						></PopularTop20>
 						<Slider
-							data={movieNow}
+							data={movieNow?.results}
 							title="현재 상영중인 영화"
-							category="movies"
+							category="movie"
 						></Slider>
 						<Slider
-							data={moviePop}
+							data={moviePop?.results}
 							title="인기있는 영화"
-							category="movies"
+							category="movie"
 						></Slider>
 						<Slider
-							data={movieUpcoming}
+							data={movieUpcoming?.results}
 							title="다가오는 영화"
-							category="movies"
+							category="movie"
 						></Slider>
 					</MainWrapper>
 				</>

@@ -32,7 +32,7 @@ const router = createBrowserRouter(
 					element: <Movie />,
 				},
 				{
-					path: "movies/:moviesid",
+					path: ":movieid",
 					element: <DetailScreen />,
 				},
 				{
@@ -53,17 +53,15 @@ const router = createBrowserRouter(
 				},
 				{
 					path: "likedcontents",
-					element: <EtcPages />,
+					element: <LikedContents />,
 				},
 				{
 					path: "search",
 					element: <Search />,
-					children: [
-						{
-							path: ":keyword",
-							element: <SearchResult />,
-						},
-					],
+				},
+				{
+					path: "search/result/:keyword",
+					element: <SearchResult />,
 				},
 			],
 		},

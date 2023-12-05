@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
-export const Loading = styled.div`
+export const Loading = styled.div<{ bgphoto: string }>`
 	width: 100%;
-	height: 500px;
-	font-size: 28px;
+	height: 1000px;
 	color: white;
-	text-align: center;
 	margin-top: 50px;
+	background-size: 100% 100%;
+	background-image: url(${(props) => props.bgphoto});
 `;
 
 export const MainWrapper = styled.div`

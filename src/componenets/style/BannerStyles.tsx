@@ -64,6 +64,7 @@ export const PlayBtn = styled.div`
 	font-weight: 600;
 	cursor: pointer;
 	&:hover {
+		transition: 0.3s;
 		background-color: #006eb3;
 	}
 	svg {

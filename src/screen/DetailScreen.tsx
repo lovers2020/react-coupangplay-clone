@@ -25,8 +25,15 @@ import {
 	PlayBtn,
 } from "../componenets/style/BannerStyles";
 import { Detail } from "../componenets/style/DetailStyles";
-import { CreateImagePath } from "../utils/utils";
-import { useEffect } from "react";
+import {
+	CreateImagePath,
+	LOADING_IMG,
+	NOT_FOUND_URL,
+	movieLikedId,
+	tvLikedId,
+} from "../utils/utils";
+import { Loading } from "../style/HomeStyles";
+import { useRecoilState } from "recoil";
 
 interface ITvLogo {
 	logos: [
@@ -39,9 +46,13 @@ interface ITvLogo {
 
 export function DetailScreen() {
 	window.scrollTo(0, 0);
+	const [tvLiked, setTvLiked] = useRecoilState(tvLikedId);
+	const [movieLiked, setMovieLiked] = useRecoilState(movieLikedId);
+
 	const location = useLocation().pathname.slice(1, 3);
 	let id = useLocation().pathname;
-	if (location === "mo") id = id.slice(14);
+
+	if (location === "mo") id = id.slice(6);
 	else id = id.slice(3);
 
 	const { data: tvDetail, isLoading: tvDetailisLoading } = useQuery<IDetails>(
@@ -66,6 +77,7 @@ export function DetailScreen() {
 	);
 	const { data: movieLogo, isLoading: movieLogoisLoading } =
 		useQuery<ITvLogo>(["movieLogo", id], () => getMovieImage(Number(id)));
+
 	let logo: any = "";
 	let genres: any = [{}];
 	let runtime = 0;
@@ -74,7 +86,6 @@ export function DetailScreen() {
 	let voteAverage = "";
 	let overView = "";
 	let backDropPath = "";
-	console.log(movieLogo);
 
 	if (
 		!tvDetailisLoading &&
@@ -92,7 +103,9 @@ export function DetailScreen() {
 		genreLength = tvDetail.genres.length - 1;
 		voteAverage = tvDetail?.vote_average.toFixed(1);
 		firstAirDate = tvDetail.first_air_date.slice(0, 4);
-		backDropPath = tvDetail.backdrop_path;
+		backDropPath = tvDetail.backdrop_path
+			? tvDetail.backdrop_path
+			: tvDetail.poster_path;
 	} else if (
 		!movieDetailisLoading &&
 		movieDetail &&
@@ -103,24 +116,49 @@ export function DetailScreen() {
 		overView = movieDetail?.overview
 			? movieDetail.overview.slice(0, 240) + ".."
 			: movieDetailEn?.overview.slice(0, 240) + "..";
-		for (let i = 0; i < 20; i++) {
-			if (movieLogo.logos[0]) {
-				if (movieLogo.logos[i].iso_639_1 === "en") {
-					logo = movieLogo.logos[i].file_path;
-					break;
+		if (movieLogo.logos.length) {
+			for (let i = 0; i < movieLogo.logos.length; i++) {
+				if (movieLogo.logos[i].iso_639_1) {
+					if (movieLogo.logos[i].iso_639_1 === "en") {
+						logo = movieLogo.logos[i].file_path;
+						break;
+					}
 				}
-			} else logo = movieDetail.title;
-		}
+				logo = movieDetail.title;
+			}
+		} else logo = movieDetail.title;
 		genres = movieDetail.genres;
 		runtime = movieDetail.runtime;
 		genreLength = movieDetail.genres.length - 1;
 		voteAverage = movieDetail?.vote_average.toFixed(1);
 		firstAirDate = movieDetail.release_date.slice(0, 4);
-		backDropPath = movieDetail.backdrop_path;
+		backDropPath = movieDetail.backdrop_path
+			? movieDetail.backdrop_path
+			: movieDetail.poster_path;
+	}
+	function clickLiked() {
+		if (location === "mo" && !movieLiked.includes(id))
+			setMovieLiked((prev) => [...prev, id]);
+		else if (location === "mo" && movieLiked.includes(id))
+			setMovieLiked((prev) => prev.filter((element) => element !== id));
+		if (location === "tv" && !tvLiked.includes(id))
+			setTvLiked((prev) => [...prev, id]);
+		else if (location === "tv" && tvLiked.includes(id))
+			setTvLiked((prev) => prev.filter((element) => element !== id));
+	}
+	function liked() {
+		return location === "mo"
+			? movieLiked.includes(id)
+			: tvLiked.includes(id);
 	}
 	return (
 		<>
-			{!tvDetail && tvLogoisLoading && movieLogoisLoading ? null : (
+			{tvLogoisLoading &&
+			movieLogoisLoading &&
+			tvDetailisLoading &&
+			movieDetailisLoading ? (
+				<Loading bgphoto={LOADING_IMG}></Loading>
+			) : (
 				<DetailContainer>
 					<MainBg>
 						<MainBgDetail>
@@ -145,8 +183,10 @@ export function DetailScreen() {
 								<span>{voteAverage}</span>•
 								{
 									<span>
-										{genres ? genres[0].name : "드라마"} •{" "}
-										{runtime ? runtime : "40"}분 •{" "}
+										{genres.length !== 0
+											? genres[0].name
+											: "드라마"}{" "}
+										• {runtime ? runtime : "40"}분 •{" "}
 										{firstAirDate}
 									</span>
 								}
@@ -162,8 +202,8 @@ export function DetailScreen() {
 									<span>재생하기</span>
 								</PlayBtn>
 								<AddLikeWrapper>
-									<AddLike>
-										<span>+</span>
+									<AddLike onClick={clickLiked}>
+										<span>{liked() ? "√" : "+"}</span>
 									</AddLike>
 									<p>찜한 컨텐츠</p>
 								</AddLikeWrapper>
@@ -188,7 +228,11 @@ export function DetailScreen() {
 							</span>
 						</MainBgDetail>
 						<MainBgImg
-							bgphoto={CreateImagePath(backDropPath)}
+							bgphoto={
+								backDropPath
+									? CreateImagePath(backDropPath)
+									: NOT_FOUND_URL
+							}
 							width="90%"
 							height="1200px"
 						></MainBgImg>

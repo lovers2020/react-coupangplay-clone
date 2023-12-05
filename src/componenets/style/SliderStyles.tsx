@@ -11,7 +11,8 @@ export const SliderWrapper = styled(motion.div)`
 	position: absolute;
 	width: 95%;
 	top: 50px;
-	left: 50px;
+	left: 2.5%;
+	gap: 10px;
 	height: 180px;
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
@@ -26,11 +27,11 @@ export const SliderWrapper = styled(motion.div)`
 		transition: scale 0.3s linear;
 		z-index: 3;
 		scale: 1.3;
-		&:first-child {
-			transform-origin: left bottom;
-		}
 		&:last-child {
 			transform-origin: right bottom;
+		}
+		&:first-child {
+			transform-origin: left bottom;
 		}
 	}
 `;
@@ -45,26 +46,34 @@ export const SliderBox = styled.div<{ bgphoto: string }>`
 export const NextBtn = styled.button`
 	height: 100%;
 	position: absolute;
-	top: 0;
+	top: 5%;
 	right: 0;
 	z-index: 1;
 	background-color: transparent;
 	border: none;
 	font-size: 48px;
-	color: white;
+	color: transparent;
 	cursor: pointer;
+	&:hover {
+		transition: color 0.4s;
+		color: white;
+	}
 `;
 export const PrevBtn = styled.button`
 	height: 100%;
 	position: absolute;
-	top: 0;
+	top: 5%;
 	left: 0;
 	z-index: 1;
 	background-color: transparent;
 	border: none;
 	font-size: 48px;
-	color: white;
+	color: black;
 	cursor: pointer;
+	&:hover {
+		transition: color 0.4s;
+		color: white;
+	}
 `;
 export const rowVaritants = {
 	hidden: (dir: number) => ({

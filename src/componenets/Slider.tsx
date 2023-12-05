@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import { NextBtn, PrevBtn } from "./style/SliderStyles";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
-import { CreateImagePath } from "../utils/utils";
+import { CreateImagePath, NOT_FOUND_URL } from "../utils/utils";
 import GetDetail from "./common/getDetail";
 import { Link } from "react-router-dom";
 
@@ -24,13 +24,13 @@ export default function Slider({ data, title, category }: any) {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(1);
-		setIndex((prev) => (prev === 2 ? (prev = 0) : prev + 1));
+		setIndex((prev) => (prev === 2 ? 0 : prev + 1));
 	}
 	function DecreaseIndex() {
 		if (leaving) return;
 		setLeaving(true);
 		setDir(-1);
-		setIndex((prev) => (prev === 0 ? (prev = 2) : prev - 1));
+		setIndex((prev) => (prev === 0 ? 2 : prev - 1));
 	}
 	function toggleLeaving() {
 		setLeaving((prev) => !prev);
@@ -38,7 +38,9 @@ export default function Slider({ data, title, category }: any) {
 
 	return (
 		<>
-			{!data ? null : (
+			{!data ? (
+				<div>Loading</div>
+			) : (
 				<SliderContainer>
 					<Title>{title}</Title>
 
@@ -59,22 +61,30 @@ export default function Slider({ data, title, category }: any) {
 							exit="exit"
 							key={index}
 						>
-							{data.results
+							{data
 								.slice(index * offset, index * offset + offset)
 								.map((current: any) => (
 									<>
-										<Link to={category + current.id}>
+										<Link to={"/" + category + current.id}>
 											<SliderBox
 												key={category + current.id}
-												bgphoto={CreateImagePath(
-													current.backdrop_path
-														? current.backdrop_path
-														: current.poster_path,
-													"w500"
-												)}
+												bgphoto={
+													current.backdrop_path !=
+													null
+														? CreateImagePath(
+																current.backdrop_path
+														  )
+														: current.poster_path !=
+														  null
+														? CreateImagePath(
+																current.poster_path
+														  )
+														: NOT_FOUND_URL
+												}
 											>
 												<GetDetail
 													id={current.id}
+													category={category}
 												></GetDetail>
 											</SliderBox>
 										</Link>
